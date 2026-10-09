@@ -1,0 +1,99 @@
+/* About: existing font and color tokens, one synchronized composition. */
+.about__signals {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 6vh var(--pad) 0 calc(var(--pad) + 60px);
+  padding-block: 30px;
+  border-block: 1px solid var(--line);
+}
+.signal { min-width: 0; padding-inline: clamp(16px, 2.5vw, 40px); }
+.signal:first-child { padding-left: 0; }
+.signal:last-child { padding-right: 0; }
+.signal + .signal { border-left: 1px solid var(--line); }
+.signal__label { margin-bottom: 20px; color: var(--ink-2); }
+.signal__value { font-family: var(--serif); font-size: clamp(1.75rem, 2.8vw, 3rem); line-height: 1.15; font-weight: 400; }
+.signal__ticks { display: flex; align-items: end; gap: 10px; height: 22px; margin-top: 18px; }
+.signal__ticks i { width: 2px; height: 15px; background: var(--ink); opacity: 0.3; }
+.signal__ticks i:nth-child(odd) { height: 22px; }
+.signal__ticks i:last-child { background: var(--accent); opacity: 1; box-shadow: 0 0 9px rgb(255 75 38 / 45%); }
+.signal__status { display: inline-flex; align-items: center; gap: 10px; max-width: 100%; border: 1px solid var(--line); border-radius: 99px; padding: 10px 14px; font-family: var(--serif); font-size: clamp(1.1rem, 1.55vw, 1.6rem); line-height: 1.25; }
+.signal__dot { position: relative; width: 7px; height: 7px; flex: none; border-radius: 50%; background: #32754e; }
+.signal__dot::after { content: ''; position: absolute; inset: -4px; border: 1px solid #32754e; border-radius: inherit; animation: signal-pulse 2s ease-out infinite; }
+@keyframes signal-pulse { 0% { transform: scale(0.5); opacity: 0.7; } 80%, 100% { transform: scale(1.4); opacity: 0; } }
+.signal__toolkit { height: 1.15em; overflow: hidden; }
+.signal__words { display: flex; flex-direction: column; animation: signal-words 8s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
+.signal__words span { height: 1.15em; flex: none; }
+@keyframes signal-words {
+  0%, 20% { transform: translateY(0); }
+  25%, 45% { transform: translateY(-20%); }
+  50%, 70% { transform: translateY(-40%); }
+  75%, 95% { transform: translateY(-60%); }
+  100% { transform: translateY(-80%); }
+}
+.signal__awards { display: flex; justify-content: space-between; gap: 10px; list-style: none; }
+.signal__awards li { display: grid; justify-items: center; gap: 12px; }
+.signal__star { font-family: var(--serif); font-size: 2rem; line-height: 1.1; }
+.signal__year { font-family: var(--mono); font-size: 10px; color: var(--ink-2); }
+.about__cols {
+  --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: clamp(36px, 5vw, 84px);
+  align-items: center;
+  padding: clamp(64px, 8vw, 120px) var(--pad) clamp(72px, 9vw, 136px) calc(var(--pad) + 60px);
+}
+.portrait { margin: 0; min-width: 0; }
+.portrait__frame { position: relative; aspect-ratio: 1; isolation: isolate; }
+.portrait__strip {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(calc(var(--i) * 100% / 6 + 1px) 0 calc((5 - var(--i)) * 100% / 6 + 1px));
+  transform-origin: 50% calc((var(--i) + 0.5) * 100% / 6);
+}
+.portrait__strip img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.portrait__grain { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.075; pointer-events: none; mix-blend-mode: multiply; }
+.portrait figcaption { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 20px; color: var(--ink-2); font-size: 10px; }
+.portrait__credit { color: var(--ink-2); }
+.about__details { display: grid; gap: clamp(28px, 3vw, 46px); }
+.about__block .k { padding-bottom: 12px; border-bottom: 1px solid var(--line); color: var(--ink-2); font-weight: 400; }
+.about__block p { margin-top: 16px; max-width: 48ch; color: var(--ink-2); font-size: clamp(1rem, 1.3vw, 1.2rem); line-height: 1.65; }
+/* Visible by default: a script failure never hides the content. */
+.about__cols.is-reveal-ready:not(.is-visible) .portrait__strip { transform: translateX(var(--scatter-x)) rotate(var(--scatter-r)); opacity: 0; }
+.about__cols.is-reveal-ready:not(.is-visible) .about__block { transform: translateY(24px); opacity: 0; }
+.about__cols.is-reveal-ready:not(.is-visible) .portrait figcaption { opacity: 0; }
+.about__cols.is-visible .portrait__strip { transition: transform 0.9s var(--reveal-ease), opacity 0.9s var(--reveal-ease); transition-delay: calc(var(--i) * 0.08s); }
+/* 0.6s + 0.7s = 1.3s, matching strip six: 0.4s + 0.9s. */
+.about__cols.is-visible .about__block { transition: transform 0.7s var(--reveal-ease), opacity 0.7s var(--reveal-ease); transition-delay: var(--text-delay); }
+.about__cols.is-visible .portrait figcaption { transition: opacity 0.7s var(--reveal-ease) 0.6s; }
+.about__signals.is-paused .signal__words, .about__signals.is-paused .signal__dot::after { animation-play-state: paused; }
+@media (max-width: 960px) {
+  .about__signals { margin-left: var(--pad); grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; }
+  .signal:nth-child(3) { padding-left: 0; border-left: 0; }
+  .signal:nth-child(2) { padding-right: 0; }
+  .signal:nth-child(n + 3) { padding-top: 28px; border-top: 1px solid var(--line); }
+  .about__cols { padding-left: var(--pad); gap: 32px; }
+}
+@media (max-width: 720px) {
+  .about__cols { grid-template-columns: minmax(0, 1fr); gap: 44px; }
+  .portrait { width: 100%; }
+  .about__details { gap: 32px; }
+  .about__block p { max-width: none; }
+  .signal { padding-inline: 16px; }
+  .signal__status { padding: 9px 10px; gap: 8px; font-size: 1.05rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about__cols.is-reveal-ready:not(.is-visible) .portrait__strip,
+  .about__cols.is-reveal-ready:not(.is-visible) .about__block { transform: none; }
+  .about__cols.is-visible .portrait__strip,
+  .about__cols.is-visible .about__block,
+  .about__cols.is-visible .portrait figcaption { transition: opacity 0.2s ease; transition-delay: 0s; }
+  .signal__words, .signal__dot::after { animation: none; }
+  .signal__dot::after { display: none; }
+}
+.lite .about__cols.is-reveal-ready:not(.is-visible) .portrait__strip,
+.lite .about__cols.is-reveal-ready:not(.is-visible) .about__block { transform: none; }
+.lite .about__cols.is-visible .portrait__strip,
+.lite .about__cols.is-visible .about__block,
+.lite .about__cols.is-visible .portrait figcaption { transition: opacity 0.2s ease; transition-delay: 0s; }
+.lite .signal__words, .lite .signal__dot::after { animation: none; }
+.lite .signal__dot::after { display: none; }

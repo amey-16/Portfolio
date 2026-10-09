@@ -7,18 +7,6 @@
 .wd { display: inline-block; }
 .pill { display: inline-block; height: 0.72em; width: 2.5em; border-radius: 99px; overflow: hidden; vertical-align: -0.02em; background: var(--ink); position: relative; }
 .pill__cv { position: absolute; inset: 0; width: 100%; height: 100%; }
-.about__stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0 24px; padding: 0 var(--pad) 0 calc(var(--pad) + 60px); margin-top: 6vh; }
-.stat { padding: 28px 0 36px; border-top: 1px solid var(--line); }
-.stat .odo { font-family: var(--display); font-size: clamp(4.4rem, 10vw, 10.5rem); line-height: 1; display: flex; }
-.stat__l { display: block; margin-top: 10px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--mute); }
-.about__cols { display: grid; grid-template-columns: minmax(200px, 1.15fr) repeat(3, 1fr); gap: 32px; align-items: start; padding: 60px var(--pad) 70px calc(var(--pad) + 60px); }
-.portrait { margin: 0; }
-.portrait__frame { position: relative; aspect-ratio: 4 / 5; border-radius: 6px; overflow: hidden; background: var(--ink); }
-.portrait__ph { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--display); font-size: clamp(6rem, 12vw, 12rem); color: var(--accent); }
-.portrait__frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); transition: filter 0.6s var(--ease), transform 0.9s var(--ease); }
-.portrait__frame:hover img { filter: none; transform: scale(1.03); }
-.portrait figcaption { margin-top: 12px; }
-.about__cols p { margin-top: 12px; max-width: 32ch; color: var(--ink-2); }
 .marquee { overflow: hidden; border-block: 1px solid var(--line); padding: 14px 0 6px; }
 .marquee__row { display: flex; width: max-content; align-items: center; gap: 0; font-family: var(--display); text-transform: uppercase; font-size: clamp(3rem, 8.5vw, 9rem); line-height: 1.05; white-space: nowrap; }
 .marquee__row span { padding: 0 0.3em; }
@@ -81,12 +69,9 @@
 .orbit__item:hover svg, .orbit__item:focus-visible svg { fill: var(--bone); }
 
 @media (max-width: 960px) {
-  .about__pin, .about__stats, .about__cols, .stack { padding-left: var(--pad); }
+  .about__pin, .stack { padding-left: var(--pad); }
   .exp__head, .work__head { left: var(--pad); }
   .stack { grid-template-columns: 1fr; }
-  .about__stats { grid-template-columns: 1fr 1fr; }
-  .about__cols { grid-template-columns: 1fr; }
-  .portrait { max-width: 360px; }
 }
 @media (max-width: 720px) {
   .exp__head { top: 84px; }

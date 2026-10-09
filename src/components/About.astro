@@ -6,23 +6,53 @@
           <p class="eyebrow">About</p>
           <p class="about__lead" data-fill>I’m Amey. <span class="pill" data-pill="flow"></span> For seven years I’ve helped founders and studios turn complicated <span class="pill" data-pill="tangle"></span> ideas into products that feel obvious, <span class="pill" data-pill="dots"></span> then built them with the same care in code.</p>
         </div>
-        <div class="about__stats">
-          <div class="stat"><span class="odo" data-odo="7"></span><span class="stat__l">Years in practice</span></div>
-          <div class="stat"><span class="odo" data-odo="42"></span><span class="stat__l">Launches shipped</span></div>
-          <div class="stat"><span class="odo" data-odo="9"></span><span class="stat__l">Industries</span></div>
-          <div class="stat"><span class="odo" data-odo="4"></span><span class="stat__l">Awwwards Sites of the Day</span></div>
+        <div class="about__signals" aria-label="At a glance">
+          <div class="signal">
+            <span class="k signal__label">Practice</span>
+            <p class="signal__value">Since 2018</p>
+            <div class="signal__ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="signal">
+            <span class="k signal__label">Currently</span>
+            <p class="signal__status"><span class="signal__dot" aria-hidden="true"></span><span>Building @ Devloper</span></p>
+          </div>
+          <div class="signal">
+            <span class="k signal__label">Toolkit</span>
+            <div class="signal__value signal__toolkit" role="img" aria-label="Figma, Code, Motion, Systems">
+              <div class="signal__words" aria-hidden="true"><span>Figma</span><span>Code</span><span>Motion</span><span>Systems</span><span>Figma</span></div>
+            </div>
+          </div>
+          <div class="signal">
+            <span class="k signal__label">Recognition</span>
+            <ul class="signal__awards" aria-label="Recognition years">
+              {[2021, 2022, 2023, 2024].map((year) => <li><span class="signal__star" aria-hidden="true">✳</span><span class="signal__year">{year}</span></li>)}
+            </ul>
+          </div>
         </div>
         <div class="about__cols">
           <figure class="portrait">
-            <div class="portrait__frame">
-              <span class="portrait__ph" aria-hidden="true">A</span>
-              <img src="/amey.jpg" alt="Portrait of Amey" width="800" height="1000" loading="lazy" decoding="async" onerror="this.remove()" />
+            <div class="portrait__frame" role="img" aria-label="Black-and-white editorial portrait of Amey, looking to the side">
+              <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+                <defs><filter id="about-film-grain"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" /><feColorMatrix type="saturate" values="0" /></filter></defs>
+              </svg>
+              {[
+                { x: -112, r: -3.5 }, { x: 86, r: 2.8 },
+                { x: -68, r: -1.8 }, { x: 120, r: 3.6 },
+                { x: -96, r: -2.6 }, { x: 64, r: 1.6 },
+              ].map((strip, i) => (
+                <span class="portrait__strip" style={`--i:${i};--scatter-x:${strip.x}px;--scatter-r:${strip.r}deg`} aria-hidden="true">
+                  <img src="/amey-editorial.png" alt="" width="1254" height="1254" loading="lazy" decoding="async" />
+                  <svg class="portrait__grain" width="100%" height="100%" aria-hidden="true"><rect width="100%" height="100%" filter="url(#about-film-grain)" /></svg>
+                </span>
+              ))}
             </div>
-            <figcaption class="k">Amey — Designer &amp; developer</figcaption>
+            <figcaption class="k"><span>Amey — Designer &amp; developer</span><span class="portrait__credit">In focus / 2026</span></figcaption>
           </figure>
-          <div><span class="k">Focus</span><p>Product design, design systems and interactive websites for early-stage and growing teams.</p></div>
-          <div><span class="k">Approach</span><p>Small teams, short loops, real prototypes. I design in the browser as soon as the idea can survive it.</p></div>
-          <div><span class="k">Outside work</span><p>Film photography, mechanical keyboards and too many type specimens.</p></div>
+          <div class="about__details">
+            <div class="about__block" style="--text-delay:0.2s"><h3 class="k">Focus</h3><p>Product design, design systems and interactive websites for early-stage and growing teams.</p></div>
+            <div class="about__block" style="--text-delay:0.4s"><h3 class="k">Approach</h3><p>Small teams, short loops, real prototypes. I design in the browser as soon as the idea can survive it.</p></div>
+            <div class="about__block" style="--text-delay:0.6s"><h3 class="k">Outside work</h3><p>Film photography, mechanical keyboards and too many type specimens.</p></div>
+          </div>
         </div>
         <div class="marquee" aria-hidden="true">
           <div class="marquee__row"><span>Product design</span><i>✺</i><span>Design systems</span><i>✺</i><span>Creative development</span><i>✺</i><span>Interaction</span><i>✺</i><span>Brand</span><i>✺</i></div>

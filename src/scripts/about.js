@@ -1,10 +1,11 @@
 import { gsap, ScrollTrigger, $, $$, tickers, watchVisible, reduced, clamp, time } from './core.js'
 import { makeMarquee } from './marquee.js'
+import { initAboutComposition } from './about-reveal.js'
 
 /*
   About. The statement is split into words that light up as you scroll while
   small live canvases ("pills") open inline between them. A scribble in one
-  pill straightens as the sentence completes. Numbers are odometers.
+  pill straightens as the sentence completes. The portrait and supporting copy assemble together.
 */
 
 const INK = '#0e0e0d', ACC = '#ff4b26', BONE = '#ece9e1'
@@ -102,13 +103,6 @@ export function initAbout(root) {
     tl.to({}, { duration: 0.12 }) // a short hold on the finished sentence
   }
 
-  /* stats: odometers roll up */
-  $$('.stat .odo', root).forEach((el) => {
-    const target = el.dataset.odo
-    el._odo.snap('0'.repeat(target.length))
-    ScrollTrigger.create({ trigger: el, start: 'top 88%', once: true, onEnter: () => el._odo.set(target, { duration: reduced ? 0 : 1.8, stagger: 0.12, ease: 'expo.out' }) })
-  })
-  gsap.from($$('.stat', root), { opacity: 0, y: 40, duration: 1.1, ease: 'expo.out', stagger: 0.1, scrollTrigger: { trigger: '.about__stats', start: 'top 88%' } })
-  gsap.from($$('.about__cols > div', root), { y: 40, opacity: 0, stagger: 0.12, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: '.about__cols', start: 'top 88%' } })
+  initAboutComposition(root)
   makeMarquee($('.marquee', root), { speed: 70, dir: 1, lean: 10 })
 }
