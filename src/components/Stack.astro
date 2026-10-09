@@ -1,12 +1,17 @@
 ---
+import { skillGroups } from '../scripts/data.js'
 ---
       <!-- ============ STACK (from v2): logo sphere ============ -->
       <section class="stack sec" id="stack" data-rail="Stack">
         <div class="stack__copy">
           <p class="eyebrow">Stack</p>
           <h2 class="stack__title" aria-label="The tools I reach for, in orbit."><span class="ln"><span>The tools I reach for,</span></span> <span class="ln"><span><em>in orbit.</em></span></span></h2>
-          <p class="stack__p">Design in Figma, motion in After Effects and Rive, build in React, Three.js and GSAP. Drag the sphere; hover a logo to see how I use it.</p>
-          <div class="stack__detail"><span class="stack__tool">Figma</span><span class="stack__use">Where every project starts.</span></div>
+          <p class="stack__p">React and Next.js on the frontend. Node.js, FastAPI and databases behind it. Python and computer vision for AI systems. Drag the sphere; select a tool to learn more.</p>
+          <div class="stack__detail" aria-live="polite"><span class="stack__tool">React</span><span class="stack__use">Dashboards and full-stack application interfaces.</span></div>
         </div>
         <div class="orbit" data-cursor="Drag"><div class="orbit__stage"></div></div>
+      </section>
+      <section class="skills sec" aria-label="Technical skills">
+        <h2>From interface to intelligence</h2>
+        <dl class="skills__list">{skillGroups.map((group) => (<div><dt>{group.name}</dt><dd>{group.items}</dd></div>))}</dl>
       </section>

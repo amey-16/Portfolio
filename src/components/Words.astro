@@ -1,32 +1,24 @@
+﻿---
+import { education } from '../scripts/data.js'
 ---
----
-      <!-- ============ KIND WORDS: throwable cards ============ -->
-      <section class="words sec sec--accent" id="words" data-rail="Kind words">
-        <div class="words__bg" aria-hidden="true"><div class="words__marq"><span>Kind words</span><span>Kind words</span><span>Kind words</span><span>Kind words</span></div></div>
-        <div class="words__stage">
-          <p class="eyebrow">Kind words</p>
-          <div class="deck" data-cursor="Drag">
-            <figure class="card">
-              <svg class="card__q" viewBox="0 0 120 100" aria-hidden="true"><path d="M50 10 C 20 20 8 45 10 80 L 45 80 L 45 48 L 26 48 C 26 32 36 22 52 18 Z M110 10 C 80 20 68 45 70 80 L 105 80 L 105 48 L 86 48 C 86 32 96 22 112 18 Z" /></svg>
-              <blockquote>Amey made our product feel twice as fast without changing a single API. People think we rebuilt the backend.</blockquote>
-              <figcaption><span class="av">RM</span><span><b>Riya Menon</b>Head of Product, Ledger</span></figcaption>
-            </figure>
-            <figure class="card">
-              <svg class="card__q" viewBox="0 0 120 100" aria-hidden="true"><path d="M50 10 C 20 20 8 45 10 80 L 45 80 L 45 48 L 26 48 C 26 32 36 22 52 18 Z M110 10 C 80 20 68 45 70 80 L 105 80 L 105 48 L 86 48 C 86 32 96 22 112 18 Z" /></svg>
-              <blockquote>Rare to find someone who argues for the user in the design review and then writes the shader himself.</blockquote>
-              <figcaption><span class="av">TA</span><span><b>Tom Ashby</b>Creative Director, Studio Nimbus</span></figcaption>
-            </figure>
-            <figure class="card">
-              <svg class="card__q" viewBox="0 0 120 100" aria-hidden="true"><path d="M50 10 C 20 20 8 45 10 80 L 45 80 L 45 48 L 26 48 C 26 32 36 22 52 18 Z M110 10 C 80 20 68 45 70 80 L 105 80 L 105 48 L 86 48 C 86 32 96 22 112 18 Z" /></svg>
-              <blockquote>Our launch site did more for the brand than the whole first year of ads. Calm, precise and fun to work with.</blockquote>
-              <figcaption><span class="av">LF</span><span><b>Lena Fischer</b>Founder, Molten Coffee</span></figcaption>
-            </figure>
-          </div>
-          <div class="words__nav">
-            <button class="rbtn" data-dir="-1" aria-label="Previous quote" data-cursor="hover" data-magnetic>←</button>
-            <span class="words__count"><b>1</b> / 3</span>
-            <button class="rbtn" data-dir="1" aria-label="Next quote" data-cursor="hover" data-magnetic>→</button>
-            <span class="words__hint">Drag or throw a card</span>
-          </div>
-        </div>
-      </section>
+<section class="words sec sec--accent" id="education" data-rail="Education">
+  <div class="words__bg" aria-hidden="true"><div class="words__marq"><span>Education</span><span>Education</span><span>Education</span><span>Education</span></div></div>
+  <div class="words__stage">
+    <h2 class="words__heading">Education</h2>
+    <div class="deck" data-cursor="Drag" aria-label="Education cards">
+      {education.map((item) => (
+        <article class="card">
+          <span class="card__year">{item.year}</span>
+          <h3 class="card__text">{item.institution}</h3>
+          <div class="card__qualification"><span class="av" aria-hidden="true">{item.initials}</span><span><b>{item.qualification}</b>{item.detail}</span></div>
+        </article>
+      ))}
+    </div>
+    <div class="words__nav">
+      <button class="rbtn" data-dir="-1" aria-label="Previous education" data-cursor="hover" data-magnetic>←</button>
+      <span class="words__count" aria-live="polite"><b>1</b> / {education.length}</span>
+      <button class="rbtn" data-dir="1" aria-label="Next education" data-cursor="hover" data-magnetic>→</button>
+      <span class="words__hint">Drag to explore</span>
+    </div>
+  </div>
+</section>

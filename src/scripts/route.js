@@ -158,7 +158,7 @@ export function initRoute(root) {
     miniView.setAttribute('x', pan); miniView.setAttribute('y', 0)
     miniView.setAttribute('width', VW); miniView.setAttribute('height', VH)
 
-    hud.km.textContent = (p * 7).toFixed(1)
+    hud.km.textContent = `${Math.round(p * 100)}%`
     hud.brg.textContent = String(Math.round(((ang * 180) / Math.PI + 450) % 360)).padStart(3, '0') + '°'
     hud.grid.textContent = String.fromCharCode(65 + Math.floor(pt.x / 160) % 26) + (Math.floor(pt.y / 160) + 1)
   }

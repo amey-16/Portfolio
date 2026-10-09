@@ -1,0 +1,42 @@
+﻿/* Resume content within the existing v7 visual system. */
+.resume-link { display: inline-block; margin-top: 20px; border-bottom: 1px solid currentColor; padding-bottom: 4px; font-weight: 500; }
+.resume-link:hover { color: var(--accent); }
+.stat:last-child .odo { font-size: clamp(3rem, 5.6vw, 6rem); margin-top: 0.6em; }
+.skills { padding: 40px var(--pad) 100px calc(var(--pad) + 60px); }
+.skills h2 { max-width: 16ch; margin-bottom: 42px; }
+.skills__list > div { display: grid; grid-template-columns: minmax(170px, 1fr) 3fr; gap: 24px; padding: 22px 0; border-top: 1px solid var(--line); }
+.skills__list dt { font-weight: 600; }
+.skills__list dd { color: var(--ink-2); max-width: 70ch; line-height: 1.6; }
+.words__heading { align-self: flex-start; margin-bottom: 28px; }
+.card__year { font-family: var(--display); font-size: 3.2rem; color: var(--accent); line-height: 1; }
+.card .card__text { font-family: var(--serif); font-weight: 400; font-size: clamp(1.6rem, 3vw, 2.8rem); line-height: 1.12; letter-spacing: -0.01em; }
+.card__qualification { display: flex; align-items: center; gap: 14px; font-size: 13.5px; color: var(--ink-2); line-height: 1.35; }
+.card__qualification b { display: block; color: var(--ink); font-weight: 600; font-size: 15px; }
+.clients__head { margin-bottom: 38px; }
+.certifications__heading { max-width: 15ch; }
+.crow { grid-template-columns: 40px minmax(0, 1.2fr) minmax(0, 1fr) 64px; }
+.crow__name { font-size: clamp(1.8rem, 3.3vw, 3.8rem); }
+.crow__what { opacity: 1; transform: none; }
+.work .wt { font-size: min(8.2vw, 18vh); }
+.wi { grid-template-columns: 34px 1fr; }
+.contact__links { display: flex; flex-wrap: wrap; gap: 18px 30px; margin-top: 36px; font-size: 15px; }
+.contact__links a { border-bottom: 1px solid rgba(236, 233, 225, 0.45); padding-bottom: 4px; }
+.contact__links a:hover { color: var(--accent); }
+.menu__links a { font-size: clamp(2.2rem, 7.2vh, 6rem); }
+@media (max-width: 760px) {
+  .skills { padding-left: var(--pad); }
+  .skills__list > div { grid-template-columns: 1fr; gap: 8px; }
+  .stat:last-child .odo { font-size: clamp(3rem, 10vw, 5rem); margin-top: 0.35em; }
+  .hero__line { font-size: min(12vw, 14vh); }
+  .hero__line:nth-child(2) { margin-left: 0; }
+  .work__frame { top: 130px; height: auto; aspect-ratio: 1.6; }
+  .work .wt { font-size: clamp(2.2rem, 9vw, 3.5rem); }
+  .exp.is-lite .exp__pin { padding-left: var(--pad); }
+  .crow { grid-template-columns: 30px minmax(0, 1fr) 45px; }
+  .crow__name { font-size: clamp(1.5rem, 7vw, 2.3rem); }
+  .crow__what { grid-column: 2; grid-row: 2; }
+  .crow__y { grid-row: 1; grid-column: 3; }
+  .contact__links { gap: 18px 24px; }
+  .words__hint { display: none; }
+  .menu__links a { font-size: clamp(2rem, 6.2vh, 3.8rem); }
+}

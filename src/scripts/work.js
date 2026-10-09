@@ -86,8 +86,7 @@ export function initWork(root, { onOpen }) {
   /* ---- DOM from data ---- */
   projects.forEach((p, i) => {
     titlesEl.insertAdjacentHTML('beforeend', `<h3 class="wt" data-i="${i}"><span class="wt__t">${p.name.toUpperCase()}</span></h3>`)
-    indexEl.insertAdjacentHTML('beforeend', `<li><button type="button" class="wi" data-i="${i}" data-cursor="hover"><span class="wi__n">${pad2(i + 1)}</span><span class="wi__t">${p.name}</span><span class="wi__y">${p.year}</span></button></li>`)
-    liteEl.insertAdjacentHTML('beforeend', `<li><button type="button" class="wl" data-i="${i}"><canvas width="800" height="500"></canvas><span class="wl__n">${pad2(i + 1)} · ${p.year}</span><h3>${p.name}</h3><p>${p.summary}</p></button></li>`)
+    indexEl.insertAdjacentHTML('beforeend', `<li><button type="button" class="wi" data-i="${i}" data-cursor="hover"><span class="wi__n">${pad2(i + 1)}</span><span class="wi__t">${p.name}</span></button></li>`)
   })
   metaEl.innerHTML = `<div class="wm"><span class="k">Project</span><p class="wm__kind"></p></div><div class="wm"><span class="k">Role</span><p class="wm__role"></p></div><div class="wm"><span class="k">Tools</span><p class="wm__tools"></p></div><div class="wm wm--sum"><span class="k">In short</span><p class="wm__sum"></p></div>`
   $$('.wl canvas', liteEl).forEach((cv, i) => cv.getContext('2d').drawImage(cover(i), 0, 0, 800, 500))

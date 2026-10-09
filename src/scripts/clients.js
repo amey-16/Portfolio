@@ -1,25 +1,33 @@
 import { gsap, ScrollTrigger, $, $$, tickers, pointer, clamp, fine, reduced, charRoll } from './core.js'
-import { cover } from './covers.js'
-import { drawPoster } from './posters.js'
+import { certifications } from './data.js'
 
 /*
   Clients. A typographic list. Hovering a row rolls its name, dims the rest
   and a poster follows the cursor, tilting with its speed.
 */
 const TW = 300, TH = 380
-const POSTERS = ['swiss', 'ui', 'dots', 'type']
 
 function thumb(k) {
   const cv = document.createElement('canvas')
   cv.width = TW * 2; cv.height = TH * 2
   const c = cv.getContext('2d')
-  // rows 0..5 map onto the five project covers; the rest use the poster system
-  const map = { 0: 2, 1: 0, 3: 4, 4: 1, 5: 3 }
-  if (k in map) {
-    const src = cover(map[k])
-    const sh = src.height, sw = sh * (TW / TH)
-    c.drawImage(src, (src.width - sw) / 2, 0, sw, sh, 0, 0, cv.width, cv.height)
-  } else drawPoster(cv, cv.width, cv.height, k + 3, POSTERS[k % POSTERS.length])
+  const item = certifications[k]
+  c.fillStyle = '#0e0e0d'; c.fillRect(0, 0, cv.width, cv.height)
+  c.fillStyle = '#ff4b26'; c.font = '400 100px Anton, sans-serif'
+  c.fillText(item.initials, 40, 170)
+  c.fillStyle = '#ece9e1'; c.font = '500 32px Geist, sans-serif'
+  const wrap = (value, y) => {
+    let line = ''
+    value.split(' ').forEach((word) => {
+      const next = line ? `${line} ${word}` : word
+      if (c.measureText(next).width > cv.width - 80 && line) { c.fillText(line, 40, y); y += 46; line = word }
+      else line = next
+    })
+    c.fillText(line, 40, y)
+    return y + 70
+  }
+  const y = wrap(item.name, 280)
+  c.fillStyle = '#c9c5ba'; c.font = '400 28px Geist, sans-serif'; wrap(item.detail, y)
   return cv
 }
 
@@ -36,12 +44,13 @@ export function initClients(root) {
     rows.forEach((r, i) => {
       const line = document.createElement('i'); line.className = 'crow__line'; r.prepend(line)
       gsap.set(line, { scaleX: 0 })
-      gsap.from($$(':scope > span', r), { yPercent: 100, opacity: 0, duration: 1.1, ease: 'expo.out', stagger: 0.05, scrollTrigger: { trigger: r, start: 'top 92%' } })
+      gsap.from($$(':scope > span:not(.crow__what)', r), { yPercent: 100, opacity: 0, duration: 1.1, ease: 'expo.out', stagger: 0.05, scrollTrigger: { trigger: r, start: 'top 92%' } })
       gsap.to(line, { scaleX: 1, duration: 1.4, ease: 'expo.inOut', scrollTrigger: { trigger: r, start: 'top 92%' } })
     })
   }
 
   if (!fine || reduced) {
+    peek.hidden = true
     // touch: tap a row to open its description
     rows.forEach((r) => r.addEventListener('click', () => { const on = r.classList.contains('is-open'); rows.forEach((x) => x.classList.remove('is-open')); r.classList.toggle('is-open', !on) }))
     return

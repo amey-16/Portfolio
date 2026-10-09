@@ -1,4 +1,5 @@
 ---
+import { profile } from '../scripts/data.js'
 ---
       <!-- ============ CONTACT ============ -->
       <section class="contact sec sec--dark" id="contact" data-rail="Contact">
@@ -6,8 +7,9 @@
           <p class="eyebrow">Contact</p>
           <h2 class="contact__title" aria-label="Have something worth building?"><span class="ct-line">Have something</span><span class="ct-line"><em>worth building?</em></span></h2>
           <div class="contact__row">
-            <button class="mailkey" data-copy="hello@amey.design" data-cursor="Copy" data-magnetic><span>hello@amey.design</span></button>
-            <a class="orb" href="mailto:hello@amey.design" data-magnetic data-cursor="hover"><span class="orb__fill"></span><span class="orb__t">Start a<br />project</span><svg class="orb__ring" viewBox="0 0 160 160" aria-hidden="true"><defs><path id="orbCircle" d="M80,80 m-68,0 a68,68 0 1,1 136,0 a68,68 0 1,1 -136,0" /></defs><text><textPath href="#orbCircle">Let’s talk · Let’s make · Let’s talk · Let’s make ·</textPath></text></svg></a>
+            <button class="mailkey" data-copy={profile.email} aria-label={`Copy email address ${profile.email}`} data-cursor="Copy" data-magnetic><span>{profile.email}</span></button>
+            <a class="orb" href={`mailto:${profile.email}`} data-magnetic data-cursor="hover"><span class="orb__fill"></span><span class="orb__t">Send an<br />email</span><svg class="orb__ring" viewBox="0 0 160 160" aria-hidden="true"><defs><path id="orbCircle" d="M80,80 m-68,0 a68,68 0 1,1 136,0 a68,68 0 1,1 -136,0" /></defs><text><textPath href="#orbCircle">Let’s talk · Let’s build · Let’s talk · Let’s build ·</textPath></text></svg></a>
           </div>
+          <div class="contact__links"><a href={profile.phoneHref}>{profile.phone}</a><a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href={profile.resume} download>Download resume ↗</a></div>
         </div>
       </section>

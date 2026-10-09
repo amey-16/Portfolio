@@ -1,62 +1,38 @@
+﻿---
+const experiences = [
+  { at: '0.12', date: 'June 2024', employer: 'IBM SkillsBuild', role: 'AI/ML Intern · Virtual', description: 'Worked on machine learning fundamentals and data analysis.' },
+  { at: '0.5', date: 'July 2025', employer: 'BARC', role: 'Project Intern · Mumbai', description: 'Developed a research-focused web system under expert mentorship at Bhabha Atomic Research Centre.' },
+  { at: '0.9', date: 'July 2026', employer: 'IIT Bombay', role: 'Research Intern · Mumbai', description: 'Working on the industry project Dhatuverse.' },
+]
 ---
----
-      <!-- ============ EXPERIENCE (from v2): the survey map ============ -->
-      <section class="exp sec" id="experience" data-rail="Experience">
-        <div class="exp__pin">
-          <div class="exp__head">
-            <p class="eyebrow">Experience</p>
-            <h2>The route so far</h2>
-          </div>
-          <div class="map">
-            <div class="map__world">
-              <canvas class="map__terrain"></canvas>
-              <svg class="route__svg" aria-hidden="true"><path class="route__ghost" /><path class="route__line" /><path class="route__trail" /></svg>
-              <div class="route__car" aria-hidden="true"><i></i></div>
-              <ol class="route__stops">
-                <li class="stop" data-at="0.12">
-                  <span class="stop__pin"></span><span class="stop__stem"></span>
-                  <div class="stop__card">
-                    <span class="stop__yr">2019 — 2020 · Elev. 120 m</span>
-                    <h3>Freelance</h3>
-                    <p class="stop__role">Visual designer</p>
-                    <p>Identities and websites for cafés, studios and one very patient architect.</p>
-                  </div>
-                </li>
-                <li class="stop" data-at="0.38">
-                  <span class="stop__pin"></span><span class="stop__stem"></span>
-                  <div class="stop__card">
-                    <span class="stop__yr">2020 — 2022 · Elev. 480 m</span>
-                    <h3>Pixel &amp; Pine</h3>
-                    <p class="stop__role">Product designer, Mumbai</p>
-                    <p>Shipped a fintech app from zero to 400k users and built its first design system.</p>
-                  </div>
-                </li>
-                <li class="stop" data-at="0.64">
-                  <span class="stop__pin"></span><span class="stop__stem"></span>
-                  <div class="stop__card">
-                    <span class="stop__yr">2022 — 2024 · Elev. 1,140 m</span>
-                    <h3>Studio Nimbus</h3>
-                    <p class="stop__role">Senior designer, interaction lead</p>
-                    <p>Led interactive work for global brands. Four Awwwards Sites of the Day.</p>
-                  </div>
-                </li>
-                <li class="stop" data-at="0.9">
-                  <span class="stop__pin"></span><span class="stop__stem"></span>
-                  <div class="stop__card">
-                    <span class="stop__yr">2024 — now · Elev. 2,026 m</span>
-                    <h3>Independent</h3>
-                    <p class="stop__role">Design and creative development</p>
-                    <p>Working directly with founders across India, Europe and the US.</p>
-                  </div>
-                </li>
-              </ol>
-            </div>
-          </div>
-          <div class="map__mini" aria-hidden="true"><svg><path class="mini__route" /><rect class="mini__view" /></svg></div>
-          <div class="exp__hud" aria-hidden="true">
-            <span>Years <b class="exp__km">0.0</b></span>
-            <span>Bearing <b class="exp__brg">000°</b></span>
-            <span>Grid <b class="exp__grid">A1</b></span>
-          </div>
-        </div>
-      </section>
+<section class="exp sec" id="experience" data-rail="Experience">
+  <div class="exp__pin">
+    <div class="exp__head"><p class="eyebrow">Experience</p><h2>The route so far</h2></div>
+    <div class="map">
+      <div class="map__world">
+        <canvas class="map__terrain" aria-hidden="true"></canvas>
+        <svg class="route__svg" aria-hidden="true"><path class="route__ghost" /><path class="route__line" /><path class="route__trail" /></svg>
+        <div class="route__car" aria-hidden="true"><i></i></div>
+        <ol class="route__stops">
+          {experiences.map((experience) => (
+            <li class="stop" data-at={experience.at}>
+              <span class="stop__pin"></span><span class="stop__stem"></span>
+              <div class="stop__card">
+                <span class="stop__yr">{experience.date}</span>
+                <h3>{experience.employer}</h3>
+                <p class="stop__role">{experience.role}</p>
+                <p>{experience.description}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+    <div class="map__mini" aria-hidden="true"><svg><path class="mini__route" /><rect class="mini__view" /></svg></div>
+    <div class="exp__hud" aria-hidden="true">
+      <span>Route <b class="exp__km">0%</b></span>
+      <span>Bearing <b class="exp__brg">000°</b></span>
+      <span>Grid <b class="exp__grid">A1</b></span>
+    </div>
+  </div>
+</section>

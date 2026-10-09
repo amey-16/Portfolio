@@ -2,7 +2,7 @@ import { gsap, ScrollTrigger, SplitText, $, $$, clamp, reduced, watchVisible } f
 import { makeMarquee } from './marquee.js'
 
 /*
-  Kind words: a deck of cards you can drag and throw. Release past a
+  Education: a deck of cards you can drag and throw. Release past a
   threshold (or with a flick) and the card flies off, then rejoins the back
   of the deck. Arrow buttons do the same for keyboards and touch.
 */
@@ -11,7 +11,7 @@ export function initDeck(root) {
   const cards = $$('.card', deck)
   const N = cards.length
   const countB = $('.words__count b', root)
-  const words = cards.map((c) => SplitText.create($('blockquote', c), { type: 'words', wordsClass: 'dw' }).words)
+  const words = cards.map((c) => SplitText.create($('.card__text', c), { type: 'words', wordsClass: 'dw' }).words)
   let order = cards.map((_, i) => i)   // order[0] is the top card
   let busy = false, interacted = false
   const slot = (s) => ({ y: s * 22, scale: 1 - s * 0.055, rotate: s === 0 ? 0 : (s % 2 ? 1 : -1) * (1.6 + s * 1.4), opacity: s > 2 ? 0 : 1 })

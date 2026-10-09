@@ -1,6 +1,6 @@
-# Amey v7 — Astro + Tailwind
+﻿# Amey Shelar - Portfolio v7
 
-Static Astro site (plain JS, no TypeScript) with Tailwind CSS v4.
+Static Astro portfolio with Tailwind CSS v4 and the v7 interactive visual system.
 
 ```bash
 npm install
@@ -9,25 +9,27 @@ npm run build     # outputs ./dist
 npm run preview   # serve the production build
 ```
 
-## Structure
+On Windows PowerShell with script execution disabled, use `npm.cmd` in place of `npm`.
 
-```
-src/
-  pages/index.astro      page: composes the sections
-  layouts/Layout.astro   <head>, fonts, global CSS, loads scripts/main.js
-  components/*.astro     one file per section (Hero, Work, About, ...)
-  scripts/*.js           GSAP / Lenis / Three.js / Matter.js scenes (unchanged from v7)
-  styles/global.css      Tailwind entry + design tokens, then the v7 stylesheets
-public/                  static files; drop amey.jpg here for the About portrait
-```
+## Content
 
-## Deploying
+- `src/scripts/data.js`: profile, projects, education, certifications and skill groups.
+- `src/components/Experience.astro`: internship timeline.
+- `src/components/Hero.astro` and `About.astro`: introductory copy.
+- `public/amey-shelar-resume.pdf`: downloadable full-stack resume.
+- `src/scripts/covers.js`: locally drawn project schematics, shared by the gallery and project dialogs.
+- `src/styles/content.css`: adjustments for the real resume content within the existing design.
 
-`dist/` is plain static files. Vercel, Netlify, Cloudflare Pages: build command `npm run build`,
-output directory `dist`. Set `site` in `astro.config.mjs` once the production URL is known.
+Content is based on the three resumes supplied by Amey. The full-stack resume supplies the downloadable PDF and the main role focus; the data-focused resume adds the data-engineering skills. The About section uses an AS monogram until a personal portrait is supplied. Project dates and external project URLs are omitted because the resumes do not provide them.
 
-## Notes
+## Deployment
 
-- The About portrait expects `public/amey.jpg`; if it's missing the image removes itself and
-  the "A" placeholder shows.
-- Tailwind preflight is deliberately not imported; v7's own reset is used so rendering matches the original.
+The project lives at the repository root. Build with `npm run build` and publish `dist/` using a static hosting provider. Set `site` in `astro.config.mjs` once the production URL is known.
+
+## Restore point
+
+The complete original v7 website was saved on `main` before the resume edits:
+
+[e4058c5 - Save complete portfolio v7 before resume content updates](https://github.com/amey-16/Portfolio/commit/e4058c55aa86afc2e800a203c613dc6df633d573)
+
+To undo the resume changes while keeping the Git history, use `git revert` with the commit titled `Fill portfolio with Amey Shelar resume content`, then push the resulting commit to `main`.

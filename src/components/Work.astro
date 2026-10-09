@@ -1,4 +1,5 @@
 ---
+import { projects } from '../scripts/data.js'
 ---
       <!-- ============ WORK: shader gallery ============ -->
       <section class="work sec sec--dark" id="work" data-rail="Work">
@@ -7,7 +8,7 @@
           <div class="work__frame" data-cursor="Open case" role="button" tabindex="0" aria-label="Open the current case study"></div>
           <div class="work__head">
             <p class="eyebrow">Selected work</p>
-            <span class="work__count"><span class="odo" data-odo="01"></span> / 05</span>
+            <span class="work__count"><span class="odo" data-odo="01"></span> / {String(projects.length).padStart(2, '0')}</span>
           </div>
           <ol class="work__index" aria-label="Projects"></ol>
           <div class="work__titles" aria-live="polite"></div>
@@ -15,5 +16,9 @@
           <div class="work__hint" aria-hidden="true"><i></i><span>Scroll to change project</span></div>
           <div class="work__bar" aria-hidden="true"><i></i></div>
         </div>
-        <ul class="work__lite"></ul>
+        <ul class="work__lite">
+          {projects.map((project, index) => (
+            <li><button type="button" class="wl" data-i={index}><canvas width="800" height="500" aria-hidden="true"></canvas><span class="wl__n">{String(index + 1).padStart(2, '0')} · {project.kind}</span><h3>{project.fullName}</h3><p>{project.summary}</p></button></li>
+          ))}
+        </ul>
       </section>

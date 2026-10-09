@@ -50,7 +50,7 @@ export function initContact(root) {
   initFooter()
 }
 
-const TAGS = ['Product design', 'Design systems', 'Interaction', 'WebGL', 'React', 'Motion', 'Brand', 'Prototyping', 'Art direction', 'Creative dev', 'Figma', 'Three.js', 'GSAP', 'Type']
+const TAGS = ['Python', 'React', 'Next.js', 'Node.js', 'Express', 'FastAPI', 'SQL', 'MongoDB', 'OpenCV', 'YOLO', 'LangChain', 'Docker', 'GitHub', 'Data pipelines']
 
 function initFooter() {
   const foot = $('.foot')
