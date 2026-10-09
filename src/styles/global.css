@@ -1,0 +1,29 @@
+/*
+  Tailwind v4 entry.
+  - Theme tokens + utilities are available everywhere (class="bg-bone text-ink font-display ...").
+  - Preflight is intentionally NOT imported: the v7 stylesheets below ship their own reset and
+    the layout is tuned to it, so this keeps the render pixel-identical to the original.
+*/
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+@theme {
+  --color-bone: #ece9e1;
+  --color-paper: #ece9e1;
+  --color-ink: #0e0e0d;
+  --color-ink-2: #3b3a36;
+  --color-mute: #7b7870;
+  --color-accent: #ff4b26;
+  --color-accent-2: #ff7a59;
+
+  --font-display: 'Anton', 'Impact', 'Arial Narrow', sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-sans: 'Geist', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+}
+
+/* v7 design system + section styles (unlayered, so they win over any Tailwind base) */
+@import './style.css';
+@import './sections.css';
+@import './sections2.css';
+@import './sections3.css';
