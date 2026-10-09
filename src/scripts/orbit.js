@@ -1,36 +1,44 @@
 import {
-  siReact, siNextdotjs, siTypescript, siJavascript, siPython, siCplusplus,
-  siTailwindcss, siBootstrap, siNodedotjs, siExpress, siFastapi, siMongodb,
-  siMysql, siSqlite, siPostgresql, siQdrant, siGit, siGithub, siPostman,
-  siDocker, siGithubactions, siLangchain, siHuggingface, siOpencv, siSupabase,
+  siFigma, siReact, siNextdotjs, siThreedotjs, siGsap, siTypescript, siBlender, siWebgl, siTailwindcss,
+  siFramer, siNodedotjs, siVercel, siAstro, siSvelte, siWebflow, siCinema4d, siNotion, siGithub, siVite,
+  siSanity, siShopify, siStorybook, siSupabase, siRive, siLottiefiles, siLinear, siOpengl, siMiro,
 } from 'simple-icons'
 
+/*
+  Tech stack on a wireframe sphere. DOM logos (crisp, accessible to hover)
+  projected from 3D each frame; a canvas draws the globe's meridians with
+  the same rotation so it reads as one object.
+*/
+
 const TOOLS = [
-  [siReact, 'Dashboards and full-stack application interfaces.'],
-  [siNextdotjs, 'React-based web applications.'],
-  [siTypescript, 'Typed JavaScript for application development.'],
-  [siJavascript, 'Web interfaces and backend application logic.'],
-  [siPython, 'AI, computer vision, data processing and APIs.'],
-  [siCplusplus, 'Programming fundamentals and system-level logic.'],
-  [siTailwindcss, 'Utility-based styling for responsive interfaces.'],
-  [siBootstrap, 'Responsive layouts and UI components.'],
-  [siNodedotjs, 'Backend services for full-stack applications.'],
-  [siExpress, 'REST APIs for the retail platform.'],
-  [siFastapi, 'Python-based backend APIs.'],
-  [siMongodb, 'Document databases and aggregation pipelines.'],
-  [siMysql, 'Relational databases and SQL queries.'],
-  [siSqlite, 'Lightweight relational data storage.'],
-  [siPostgresql, 'Relational data modeling and application storage.'],
-  [siQdrant, 'Vector databases for AI applications.'],
-  [siGit, 'Version control for software projects.'],
-  [siGithub, 'Source repositories and collaboration.'],
-  [siPostman, 'API requests, testing and integration.'],
-  [siDocker, 'Containerization basics for application environments.'],
-  [siGithubactions, 'Workflow automation and CI tooling.'],
-  [siLangchain, 'Building applications around language models.'],
-  [siHuggingface, 'Machine-learning models and tools.'],
-  [siOpencv, 'Computer vision for UAV and retail projects.'],
-  [siSupabase, 'Backend and database tooling for the retail platform.'],
+  [siFigma, 'Where every project starts. Components, variables, prototypes.'],
+  [siReact, 'Default for product UI. Hooks, server components, small bundles.'],
+  [siNextdotjs, 'Marketing sites and apps that need to be fast on day one.'],
+  [siThreedotjs, 'Real-time 3D on the web. Custom shaders, not templates.'],
+  [siGsap, 'Scroll choreography and every eased curve you see here.'],
+  [siTypescript, 'Types on everything. Fewer surprises at 2am.'],
+  [siBlender, 'Modelling and lookdev for product shots and WebGL assets.'],
+  [siWebgl, 'The layer under the layer. GLSL when nothing else will do.'],
+  [siTailwindcss, 'Quick, consistent UI when the design system is settled.'],
+  [siFramer, 'Fast marketing pages and interactive prototypes.'],
+  [siNodedotjs, 'APIs, build scripts and the occasional CLI.'],
+  [siVercel, 'Previews for every pull request, deploys in seconds.'],
+  [siAstro, 'Content-heavy sites that should ship zero JavaScript.'],
+  [siSvelte, 'Small, fast interactive pieces.'],
+  [siWebflow, 'Handing marketing teams something they can edit.'],
+  [siCinema4d, 'Motion stills and product loops.'],
+  [siNotion, 'Briefs, research and the decision log.'],
+  [siGithub, 'Code review, issues and handover.'],
+  [siVite, 'The build tool behind this page.'],
+  [siSanity, 'Structured content for editorial sites.'],
+  [siShopify, 'Headless commerce for brands with taste.'],
+  [siStorybook, 'Documenting components so the system outlives me.'],
+  [siSupabase, 'Auth and Postgres for prototypes that become products.'],
+  [siRive, 'Interactive animation for product UI.'],
+  [siLottiefiles, 'Lightweight motion for apps.'],
+  [siLinear, 'Planning sprints without the ceremony.'],
+  [siOpengl, 'Graphics fundamentals, still useful.'],
+  [siMiro, 'Workshops, journey maps and sticky notes.'],
 ]
 
 export function initOrbit(root, { onTool, finePointer }) {
@@ -54,7 +62,6 @@ export function initOrbit(root, { onTool, finePointer }) {
     el.addEventListener('pointerenter', () => { item.hover = true; onTool?.(icon.title, use) })
     el.addEventListener('pointerleave', () => { item.hover = false })
     el.addEventListener('focus', () => onTool?.(icon.title, use))
-    el.addEventListener('click', () => onTool?.(icon.title, use))
     return item
   })
 

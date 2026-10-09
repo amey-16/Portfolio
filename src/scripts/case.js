@@ -20,9 +20,9 @@ export function initCase() {
     cur = i
     ctx.drawImage(cover(i), 0, 0)
     f.n.textContent = `${String(i + 1).padStart(2, '0')} / ${String(projects.length).padStart(2, '0')} · ${p.kind}`
-    f.t.textContent = p.fullName; f.sum.textContent = p.summary; f.desc.textContent = p.description
+    f.t.textContent = p.name; f.sum.textContent = p.summary; f.desc.textContent = p.description
     f.brief.textContent = p.brief; f.ch.textContent = p.challenge; f.ap.textContent = p.approach; f.res.textContent = p.result
-    f.role.textContent = p.role; f.year.textContent = p.kind; f.tools.textContent = p.tools; f.del.textContent = p.deliverables.join(' · ')
+    f.role.textContent = p.role; f.year.textContent = p.year; f.tools.textContent = p.tools; f.del.textContent = p.deliverables.join(' · ')
     f.next.textContent = nx.name
     root.setAttribute('aria-label', `${p.name} case study`)
   }

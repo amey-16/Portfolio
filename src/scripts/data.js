@@ -1,69 +1,8 @@
-﻿// Portfolio content drawn from Amey's supplied resumes.
-export const profile = {
-  name: 'Amey Shelar', role: 'Full-stack & AI developer',
-  email: 'ameys436@gmail.com', phone: '+91 9867684996', phoneHref: 'tel:+919867684996',
-  github: 'https://github.com/amey-16', linkedin: 'https://www.linkedin.com/in/amey-shelar123',
-  resume: '/amey-shelar-resume.pdf',
-}
-
+// Project content for Amey (same copy as the earlier versions).
 export const projects = [
-  {
-    name: 'VPN Dashboard', fullName: 'VPN Tunneling Dashboard',
-    kind: 'Network monitoring & data visualization', color: '#c6dcf3',
-    role: 'Dashboard development', tools: 'React.js, REST APIs, charts',
-    summary: 'A clearer view of secure network tunnels.',
-    description: 'A dashboard for monitoring VPN tunnels, including IKE and Child Security Associations, through graphs and structured tables.',
-    brief: 'Bring VPN tunnel information into a single interface for secure network monitoring.',
-    deliverables: ['Monitoring dashboard', 'Data visualizations', 'Structured tunnel tables'],
-    challenge: 'Present live tunnel and security-association data in a form that is practical to inspect.',
-    approach: 'Built a React interface connected to REST APIs, with charts and structured tables for real-time network data.',
-    result: 'A working dashboard for monitoring VPN tunnel activity and visualizing network information.',
-  },
-  {
-    name: 'JATAYU', fullName: 'JATAYU Autonomous UAV',
-    kind: 'Computer vision & autonomous systems', color: '#dce4ca',
-    role: 'AI, navigation & hardware integration', tools: 'Python, OpenCV, NanoDet, MAVLink, Flask, Raspberry Pi',
-    summary: 'Human detection meets autonomous navigation.',
-    description: 'An autonomous UAV project combining AI-based human detection and tracking with real-time navigation.',
-    brief: 'Connect computer vision, navigation and flight-control hardware in an autonomous UAV.',
-    deliverables: ['Human detection & tracking', 'Stereo-vision navigation', 'Hardware integration & control logic'],
-    challenge: 'Coordinate human detection, depth estimation and hardware control in a real-time system.',
-    approach: 'Used Python, OpenCV and NanoDet for vision, stereo vision for depth estimation, and MAVLink with Raspberry Pi for hardware integration. Flask supported the application layer.',
-    result: 'An integrated UAV project with human detection, tracking, navigation and control logic.',
-  },
-  {
-    name: 'Retail Platform', fullName: 'Retail Optimization Platform',
-    kind: 'Full-stack development & retail analytics', color: '#d9d8f0',
-    role: 'Web platform development', tools: 'React.js, Node.js, Express.js, Supabase, YOLO, OpenCV, Stripe',
-    summary: 'Retail data turned into useful business insights.',
-    description: 'A web platform for retail analytics, inventory tracking and data-driven business optimization.',
-    brief: 'Build a retail platform that brings analytics and inventory tracking together for startup use cases.',
-    deliverables: ['Retail analytics', 'Inventory tracking', 'Data-driven business insights'],
-    challenge: 'Connect retail information and inventory workflows in a system designed to scale.',
-    approach: 'Developed a React frontend with Node.js, Express.js and Supabase. The project stack also included YOLO, OpenCV and Stripe.',
-    result: 'A scalable web platform for retail analytics and inventory tracking, designed for startup use cases.',
-  },
-]
-
-export const education = [
-  { institution: 'Xavier Institute of Engineering', qualification: 'Bachelor of Engineering', detail: 'Computer Engineering', year: '2026', initials: 'BE' },
-  { institution: 'Sathaye College', qualification: 'Higher Secondary Certificate', detail: 'HSC', year: '2022', initials: 'HSC' },
-  { institution: 'Madhavrao Bhagwat High School', qualification: 'Secondary School Certificate', detail: 'SSC', year: '2020', initials: 'SSC' },
-]
-
-export const certifications = [
-  { name: 'AWS Academy', detail: 'AWS Academy Graduate', initials: 'AWS' },
-  { name: 'BARC', detail: 'Project Appreciation', initials: 'BARC' },
-  { name: 'Client', detail: 'Project Appreciation', initials: 'PR' },
-  { name: 'Infosys Springboard', detail: 'Data Analytics with Power BI and ChatGPT', initials: 'DA' },
-]
-
-export const skillGroups = [
-  { name: 'Languages', items: 'C++, Python, JavaScript, TypeScript, SQL' },
-  { name: 'Frontend', items: 'React.js, Next.js, HTML, CSS, Tailwind CSS, Bootstrap' },
-  { name: 'Backend', items: 'Node.js, Express.js, FastAPI, REST APIs, authentication, API integration' },
-  { name: 'Databases', items: 'MongoDB, MySQL, SQLite, PostgreSQL, Qdrant, Supabase' },
-  { name: 'Data engineering', items: 'ETL/ELT fundamentals, data pipelines, cleaning, transformation, modeling, aggregation pipelines' },
-  { name: 'AI & machine learning', items: 'Predictive modeling, model evaluation, LangChain, Hugging Face, YOLO, OpenCV' },
-  { name: 'Tools', items: 'Git, GitHub, Postman, Azure DevOps, Docker basics, GitHub Actions, MLOps' },
+  {name:'Orbital', kind:'Product design + creative development', year:'2026', color:'#c6dcf3', role:'Strategy, product design & front-end', tools:'Figma, Three.js, GSAP', summary:'An ambitious journey. An intuitive booking experience.', description:'A booking platform that makes commercial space travel easier to understand and explore.', brief:'How do you make an unfamiliar service feel approachable? Turn the journey into clear choices, then give the experience the sense of scale it deserves.', deliverables:['Booking journey','Responsive interface','Interactive launch site'], challenge:'Space travel is extraordinary. Comparing a trip and choosing a departure should still feel familiar. The experience had to make a complex new service understandable without losing its ambition.', approach:'A clear trip hierarchy, guided comparisons and focused booking steps carry the practical journey. A custom visual language and carefully placed motion communicate the scale around it.', result:'A single visual and interaction system, from the first discovery screen to the final booking step.'},
+  {name:'Terrain', kind:'Identity + e-commerce', year:'2025', color:'#dce4ca', role:'Brand identity, art direction & web design', tools:'Figma, Blender, React', summary:'A distinct identity for the less obvious path.', description:'A brand and online store for an outdoor gear company, built around the way people actually explore.', brief:'A flexible identity and a useful shopping experience. Topography becomes a shared language across the brand, packaging, and product pages.', deliverables:['Visual identity','Packaging system','Commerce experience'], challenge:'Outdoor brands often look and sound alike. Terrain needed a recognizable point of view, backed by an online store that made product materials and construction easy to compare.', approach:'An adaptable contour language connects the identity and packaging. The digital experience gives each product room to explain its purpose, construction and place in a kit.', result:'A connected brand system that works on the trail, on a label and on a screen.'},
+  {name:'Ledger', kind:'Product design + design system', year:'2024', color:'#d9d8f0', role:'Product designer & design systems', tools:'Figma, React, Storybook', summary:'Making the numbers make sense.', description:'A payments interface and design system for a fintech product used by 400k people.', brief:'Financial information should help people make decisions. A clearer hierarchy and a reusable component system bring consistency to a growing product.', deliverables:['Product flows','Component library','Design system'], challenge:'As the app grew, different journeys developed different patterns. The team needed a consistent way to organize financial information, build new features and communicate important states.', approach:'The work started with shared patterns and common user tasks. Components, type, color and interaction states were documented together, then applied to the key payments and reporting journeys.', result:'One reusable design language for a product that grew from zero to 400k users.'},
+  {name:'Chroma Records', kind:'Brand identity + generative motion', year:'2024', color:'#f0cfc8', role:'Brand design & generative motion', tools:'After Effects, Rive, JavaScript', summary:'A visual identity with a rhythm of its own.', description:'A flexible identity for an independent label, made to move with the music.', brief:'Give every artist their own expression without losing the label’s identity. A variable visual system scales from sleeves to screens to stages.', deliverables:['Brand identity','Cover system','Motion language'], challenge:'An independent label needs a coherent presence, but its artists should not be forced into one visual box. The identity had to remain recognizable across very different releases.', approach:'A tunable visual system uses rhythm, repetition and contrasting shapes to create a family of covers. Its motion behavior extends the same language into release campaigns and moving posters.', result:'A recognizable family of identities, with space for each release to sound—and look—different.'},
+  {name:'Molten', kind:'Art direction + creative development', year:'2023', color:'#efdbc9', role:'3D art direction & creative development', tools:'Blender, Three.js, GSAP', summary:'A small coffee brand with a big first impression.', description:'An expressive launch website for specialty coffee, with a clear path from story to product.', brief:'Character draws you in. A straightforward product journey keeps you there. A launch experience that gives the brand both.', deliverables:['3D product visuals','Launch website','Interactive motion'], challenge:'Introduce a new specialty coffee brand with personality while making the product, blends and next step immediately understandable.', approach:'Original product compositions, warm color and a confident type system establish the brand. The interactive introduction then gives way to a simple product journey.', result:'A distinctive launch experience that introduces the brand and helps people find their blend.'}
 ]
