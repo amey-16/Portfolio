@@ -41,7 +41,7 @@ const TOOLS = [
   [siMiro, 'Workshops, journey maps and sticky notes.'],
 ]
 
-export function initOrbit(root, { onTool, finePointer }) {
+export function initOrbit(root, { onTool, finePointer, reducedMotion = false }) {
   const stage = root.querySelector('.orbit__stage')
   const wire = document.createElement('canvas')
   wire.className = 'orbit__wire'
@@ -110,9 +110,8 @@ export function initOrbit(root, { onTool, finePointer }) {
 
   return function update() {
     if (!visible) return
-    ay += vy
-    ax += vx
-    if (!drag) {
+    if (!reducedMotion || drag) { ay += vy; ax += vx }
+    if (!drag && !reducedMotion) {
       vy += (0.0035 - vy) * 0.02
       vx *= 0.94
       ax += (-0.35 - ax) * 0.01

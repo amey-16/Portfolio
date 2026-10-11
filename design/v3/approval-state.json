@@ -1,0 +1,11 @@
+{
+    "status":  "awaiting-user-approval",
+    "proposal":  "design/v3/PORTRAIT-AND-MOTION.md",
+    "decisionPayload":  "design/v3/decision.json",
+    "decisionUrl":  "http://127.0.0.1:6944/",
+    "decisionKey":  "e5c31fb0",
+    "seed":  "e4bdcaf2",
+    "proposedDirection":  "living-exhibition",
+    "productionCodeChangedThisDesignRound":  false,
+    "note":  "Revised with prominent real-photo chapter and interactive motion state boards. Await explicit approval. Protected sections retain content, structure and behavior; palette only."
+}

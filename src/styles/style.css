@@ -198,7 +198,7 @@ a:hover > .cr > span, button:hover > .cr > span, .rollhover:hover .cr > span { t
   .nav__cta { display: none; }
   .rail { display: none; }
   .hero__pin { padding-top: 96px; }
-  .hero__line { font-size: min(15.4vw, 17vh); }
+  .hero__line { font-size: min(10vw, 17vh); }
   .hero__line:nth-child(2) { margin-left: 4vw; }
   .hero__line--acc { margin-left: 0; }
   .hero__lede { font-size: 14px; }

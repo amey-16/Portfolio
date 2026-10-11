@@ -38,8 +38,14 @@ vec2 textAt(vec2 p){
       q.x -= uOff[i];
       q.y += (1. - uRev[i]) * h * 1.15;
       q.x += (p.y - .5) * uVel * .10 + (1. - uRev[i]) * .03 * sin(p.y * 60.);
-      float m = smoothstep(y0, y0 + h * .03, p.y) * (1. - smoothstep(y1 - h * .03, y1, p.y));
-      res = vec2(texture2D(uText, q).a * m, i == N - 1 ? 1. : 0.);
+      float localY = (q.y - y0) / h;
+      // Each line has its own padded atlas row. Never sample a neighbouring
+      // line during the reveal or overwrite visible ink with transparent ink.
+      if (localY > 0. && localY < 1. && q.x >= 0. && q.x <= 1.) {
+        q.y = mix(uBand[i].z, uBand[i].w, localY);
+        float coverage = texture2D(uText, q).a;
+        if (coverage > res.x) res = vec2(coverage, i == N - 1 ? 1. : 0.);
+      }
     }
   }
   return res;
@@ -119,6 +125,12 @@ export function initHero(root) {
     gw = 96; gh = Math.max(24, Math.round(96 * h / w))
     vx = new Float32Array(gw * gh); vy = new Float32Array(gw * gh); en = new Float32Array(gw * gh)
     fdata = new Uint8Array(gw * gh * 4)
+    // A freshly rebuilt field must mean no displacement, including the first
+    // render before the animation ticker fills it.
+    for (let i = 0; i < gw * gh; i++) {
+      fdata[i * 4] = fdata[i * 4 + 1] = 128
+      fdata[i * 4 + 3] = 255
+    }
     ftex?.dispose()
     ftex = new THREE.DataTexture(fdata, gw, gh, THREE.RGBAFormat)
     ftex.minFilter = ftex.magFilter = THREE.LinearFilter
@@ -145,43 +157,68 @@ export function initHero(root) {
     const rect = canvas.getBoundingClientRect()
     W = Math.max(1, Math.round(rect.width)); H = Math.max(1, Math.round(rect.height))
     dpr = Math.min(devicePixelRatio || 1, 2)
-    textCanvas.width = Math.round(W * dpr); textCanvas.height = Math.round(H * dpr)
+    const measured = lines.map((line) => {
+      const target = line.querySelector('em') || line
+      const cs = getComputedStyle(target)
+      return { line, target, cs, fs: parseFloat(cs.fontSize) }
+    })
+    // CSS line boxes are tighter than the painted glyphs, especially italics.
+    // Isolate each line with generous vertical padding instead of cutting up
+    // one combined image at overlapping CSS line-box boundaries.
+    const rowPixels = Math.ceil(Math.max(...measured.map(({ fs }) => fs)) * 2 * dpr)
+    const rowHeight = rowPixels / dpr
+    const textureWidth = Math.round(W * dpr), textureHeight = rowPixels * N
+    // WebGL texture storage is immutable. Reallocate it when fonts or a
+    // breakpoint change the canvas size; a sub-image update leaves stale ink.
+    if (textCanvas.width !== textureWidth || textCanvas.height !== textureHeight) textTex.dispose()
+    textCanvas.width = textureWidth; textCanvas.height = textureHeight
     renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.75))
     renderer.setSize(W, H, false)
     uniforms.uRes.value.set(W, H)
     buildField(W, H)
     const ctx = textCanvas.getContext('2d')
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-    ctx.clearRect(0, 0, W, H)
+    ctx.clearRect(0, 0, W, rowHeight * N)
     ctx.fillStyle = '#fff'
     ctx.textBaseline = 'middle'
-    lines.forEach((line, i) => {
-      const target = line.querySelector('em') || line
-      const cs = getComputedStyle(target)
+    measured.forEach(({ line, target, cs, fs }, i) => {
       const lr = line.getBoundingClientRect()
       const tr = target.getBoundingClientRect()
-      const fs = parseFloat(cs.fontSize)
       ctx.font = `${cs.fontStyle} ${cs.fontWeight} ${fs}px ${cs.fontFamily}`
       ctx.letterSpacing = cs.letterSpacing === 'normal' ? '0px' : cs.letterSpacing
       const txt = cs.textTransform === 'uppercase' ? target.textContent.toUpperCase() : target.textContent
       const y = lr.top - rect.top + lr.height / 2 + fs * (target === line ? 0.045 : 0.05)
-      ctx.fillText(txt, tr.left - rect.left, y)
-      const pad = lr.height * 0.1
-      uniforms.uBand.value[i].set(0, 0, 0, 0)
-      uniforms.uBand.value[i].x = 1 - (lr.bottom - rect.top + pad) / H
-      uniforms.uBand.value[i].y = 1 - (lr.top - rect.top - pad) / H
+      ctx.fillText(txt, tr.left - rect.left, (i + 0.5) * rowHeight)
+      uniforms.uBand.value[i].set(
+        1 - (y + rowHeight / 2) / H,
+        1 - (y - rowHeight / 2) / H,
+        1 - (i + 1) / N,
+        1 - i / N,
+      )
     })
     textTex.needsUpdate = true
   }
 
   /* ---- state ---- */
   const S = { lens: 0, lensTarget: 0, mx: 0.62, my: 0.5, intro: 0, ready: false }
+  let contextLost = false
+  canvas.addEventListener('webglcontextlost', (event) => {
+    event.preventDefault()
+    contextLost = true
+    root.classList.remove('gl-on')
+  })
+  canvas.addEventListener('webglcontextrestored', () => {
+    contextLost = false
+    draw()
+    renderer.render(scene, camera)
+    if (S.ready) root.classList.add('gl-on')
+  })
   let lastX = 0.5, lastY = 0.5, wander = 0
   const state = watchVisible(root, null, '100px')
 
   const offsets = [-1, 1, -1.15]
   const update = (dt, t) => {
-    if (!S.ready || !state.on) return
+    if (!S.ready || !state.on || contextLost) return
     const r = canvas.getBoundingClientRect()
     // pointer in canvas uv (y up)
     let px = (pointer.x - r.left) / r.width, py = 1 - (pointer.y - r.top) / r.height
@@ -232,9 +269,17 @@ export function initHero(root) {
   let rt
   addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { draw(); }, 180) })
 
+  // Font loading and mobile viewport changes can alter the line positions
+  // without a window resize. Keep the texture aligned with its DOM source.
+  const layoutObserver = new ResizeObserver(() => {
+    if (S.ready && !contextLost) draw()
+  })
+  layoutObserver.observe(canvas)
+  lines.forEach((line) => layoutObserver.observe(line))
+
   return {
-    draw,
-    start() { draw(); S.ready = true; root.classList.add('gl-on') },
+    draw() { if (!contextLost) draw() },
+    start() { draw(); renderer.render(scene, camera); S.ready = true; root.classList.add('gl-on') },
     reveal() {
       const tl = gsap.timeline()
       for (let i = 0; i < N; i++) tl.to(uniforms.uRev.value, { [i]: 1, duration: 1.5, ease: 'expo.out' }, i * 0.12)

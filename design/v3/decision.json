@@ -1,0 +1,201 @@
+{
+    "title":  "Amey Shelar â€” redesign approval",
+    "question":  "Review the revised Living Exhibition: your dedicated photo chapter, ten-section scroll, and explicit animated-component states. Implementation waits for your approval.",
+    "options":  [
+                    {
+                        "id":  "living-exhibition",
+                        "label":  "The Living Exhibition",
+                        "kicker":  "PROPOSED DIRECTION",
+                        "lineage":  "Contemporary kinetic exhibition / industrial-design monograph",
+                        "thesis":  "Your portrait and engineering work connect through a ten-chapter sculptural narrative.",
+                        "palette":  [
+                                        "#F0EDE6",
+                                        "#581E2C",
+                                        "#232321",
+                                        "#C7D9E5"
+                                    ],
+                        "materials":  [
+                                          "porcelain",
+                                          "brushed silver",
+                                          "oxblood enamel",
+                                          "translucent architectural plates"
+                                      ],
+                        "viewport":  "The opening leads into a full portrait chapter, followed by an architecture explorer, project gallery, vision study, protected Experience and Stack, scope explorer, collaboration and contact.",
+                        "risk":  "The central sculpture needs authored 3D assets and careful performance budgeting. Protected Experience and Stack retain their existing structures.",
+                        "comp":  "design/v3/04-portrait-motion.png",
+                        "board":  "design/v3/05-complete-scroll-with-portrait.png",
+                        "raised":  [
+                                       {
+                                           "from":  "Star atlas",
+                                           "raise":  "Consistent chapter hierarchy."
+                                       },
+                                       {
+                                           "from":  "Endurance garage",
+                                           "raise":  "One identifying element continues between scenes."
+                                       },
+                                       {
+                                           "from":  "Technical zine",
+                                           "raise":  "Concise annotation makes complex relationships readable."
+                                       },
+                                       {
+                                           "from":  "Rhythm machine",
+                                           "raise":  "Precise timing and visible feedback."
+                                       },
+                                       {
+                                           "from":  "Living textile",
+                                           "raise":  "State changes respond to meaningful visitor choices."
+                                       },
+                                       {
+                                           "from":  "Layered roundel",
+                                           "raise":  "Depth comes from understandable layers."
+                                       }
+                                   ]
+                    },
+                    {
+                        "id":  "star-atlas",
+                        "label":  "Star atlas",
+                        "verdict":  "declined",
+                        "lineage":  "Star atlas",
+                        "thesis":  "Coordinate plates and scale-coded project points.",
+                        "palette":  [
+                                        "#102338",
+                                        "#EFEDE2"
+                                    ],
+                        "materials":  [
+                                          "Star atlas"
+                                      ],
+                        "viewport":  "A chart of projects centered on one bright system.",
+                        "case":  "Less aligned with the audience and less direct for understanding the projects than the proposed exhibition.",
+                        "risk":  "The astronomy association would dominate the engineering story.",
+                        "kept":  "Consistent chapter hierarchy.",
+                        "hero":  "https://impeccable.style/worlds/cards/notation-diagram-systems-star-atlas-hero.webp",
+                        "board":  "https://impeccable.style/worlds/cards/notation-diagram-systems-star-atlas.webp"
+                    },
+                    {
+                        "id":  "endurance",
+                        "label":  "Endurance garage",
+                        "verdict":  "declined",
+                        "lineage":  "Endurance garage",
+                        "thesis":  "Project panels arranged along a persistent identity stripe.",
+                        "palette":  [
+                                        "#9BCBD8",
+                                        "#F4A12A"
+                                    ],
+                        "materials":  [
+                                          "Endurance garage"
+                                      ],
+                        "viewport":  "A work panel with strong numbered wayfinding.",
+                        "case":  "Less aligned with the audience and less direct for understanding the projects than the proposed exhibition.",
+                        "risk":  "Racing language would obscure the work and commissioning path.",
+                        "kept":  "One identifying element continues between scenes.",
+                        "hero":  "https://impeccable.style/worlds/cards/pop-culture-shelf-endurance-livery-garage-hero.webp",
+                        "board":  "https://impeccable.style/worlds/cards/pop-culture-shelf-endurance-livery-garage.webp"
+                    },
+                    {
+                        "id":  "zine",
+                        "label":  "Technical zine",
+                        "verdict":  "declined",
+                        "lineage":  "Technical zine",
+                        "thesis":  "Annotated comic panels explain each engineering decision.",
+                        "palette":  [
+                                        "#F5E9D0",
+                                        "#222222"
+                                    ],
+                        "materials":  [
+                                          "Technical zine"
+                                      ],
+                        "viewport":  "An illustrated explanation with clear step controls.",
+                        "case":  "Less aligned with the audience and less direct for understanding the projects than the proposed exhibition.",
+                        "risk":  "The teaching-zine personality conflicts with the requested luxury.",
+                        "kept":  "Concise annotation makes complex relationships readable.",
+                        "hero":  "https://impeccable.style/worlds/cards/hand-drawn-zine-explainer-hero.webp",
+                        "board":  "https://impeccable.style/worlds/cards/hand-drawn-zine-explainer.webp"
+                    },
+                    {
+                        "id":  "sequencer",
+                        "label":  "Rhythm machine",
+                        "verdict":  "declined",
+                        "lineage":  "Rhythm machine",
+                        "thesis":  "Project states arranged as a precise interactive score.",
+                        "palette":  [
+                                        "#292824",
+                                        "#E66C36"
+                                    ],
+                        "materials":  [
+                                          "Rhythm machine"
+                                      ],
+                        "viewport":  "A sequenced strip of project states and tactile keys.",
+                        "case":  "Less aligned with the audience and less direct for understanding the projects than the proposed exhibition.",
+                        "risk":  "Music associations and step controls complicate navigation.",
+                        "kept":  "Precise timing and visible feedback.",
+                        "hero":  "https://impeccable.style/worlds/cards/signals-instruments-drum-machine-step-row-hero.webp",
+                        "board":  "https://impeccable.style/worlds/cards/signals-instruments-drum-machine-step-row.webp"
+                    },
+                    {
+                        "id":  "skin",
+                        "label":  "Living textile",
+                        "verdict":  "declined",
+                        "lineage":  "Living textile",
+                        "thesis":  "Context-responsive patterns behave as an information surface.",
+                        "palette":  [
+                                        "#EEE5D4",
+                                        "#974D3C"
+                                    ],
+                        "materials":  [
+                                          "Living textile"
+                                      ],
+                        "viewport":  "A surface changes in response to selected project context.",
+                        "case":  "Less aligned with the audience and less direct for understanding the projects than the proposed exhibition.",
+                        "risk":  "Biological spectacle competes with the actual software story.",
+                        "kept":  "State changes respond to meaningful visitor choices.",
+                        "hero":  "https://impeccable.style/worlds/cards/reefs-bioluminescent-nocturnal-chromatophore-skin-language-hero.webp",
+                        "board":  "https://impeccable.style/worlds/cards/reefs-bioluminescent-nocturnal-chromatophore-skin-language.webp"
+                    },
+                    {
+                        "id":  "paper",
+                        "label":  "Layered roundel",
+                        "verdict":  "declined",
+                        "lineage":  "Layered roundel",
+                        "thesis":  "Project layers build depth through an ordered assembly.",
+                        "palette":  [
+                                        "#DA4938",
+                                        "#25646C"
+                                    ],
+                        "materials":  [
+                                          "Layered roundel"
+                                      ],
+                        "viewport":  "A layered composition exposes the parts of a system.",
+                        "case":  "Less aligned with the audience and less direct for understanding the projects than the proposed exhibition.",
+                        "risk":  "Ornament and radial navigation weaken direct project reading.",
+                        "kept":  "Depth comes from understandable layers.",
+                        "hero":  "https://impeccable.style/worlds/cards/craft-making-lowicz-layered-papercut-hero.webp",
+                        "board":  "https://impeccable.style/worlds/cards/craft-making-lowicz-layered-papercut.webp"
+                    }
+                ],
+    "reroll":  {
+                   "registers":  [
+                                     "safer",
+                                     "bolder"
+                                 ]
+               },
+    "buildPath":  {
+                      "value":  "comp",
+                      "toggle":  true
+                  },
+    "canon":  true,
+    "canonCard":  {
+                      "label":  "Conventional portfolio",
+                      "thesis":  "A familiar editorial portfolio with carefully executed project pages.",
+                      "palette":  [
+                                      "#F5F5F3",
+                                      "#252525"
+                                  ],
+                      "materials":  [
+                                        "flat surfaces",
+                                        "project photography"
+                                    ],
+                      "viewport":  "A clear statement followed by a conventional work grid.",
+                      "risk":  "Closer to the familiar template direction you asked to move beyond."
+                  },
+    "steer":  true
+}

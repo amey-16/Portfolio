@@ -113,7 +113,7 @@ async function boot() {
   const load = gsap.to(P, { p: 0.82, duration: 2.4, ease: 'power2.inOut', onUpdate: paint })
 
   await Promise.race([
-    Promise.all([
+    Promise.allSettled([
       document.fonts.load('400 120px Anton'),
       document.fonts.load('italic 400 80px "Instrument Serif"'),
       document.fonts.load('400 14px "Geist Mono"'),
@@ -125,6 +125,13 @@ async function boot() {
 
   if (!reduced) heroApi = initHero($('.hero'))
   heroApi?.start()
+  // The timeout lets slow connections proceed with fallback fonts. Repaint the
+  // headline and remeasure pinned scenes when the final fonts actually arrive.
+  document.fonts.ready.then(() => {
+    heroApi?.draw()
+    redrawCovers()
+    ScrollTrigger.refresh()
+  }).catch((error) => console.warn('Font layout refresh failed', error))
   await load
   await build()
 
@@ -233,5 +240,15 @@ async function build() {
   ScrollTrigger.refresh()
 }
 
-boot()
+boot().catch((error) => {
+  console.error('Portfolio initialization failed', error)
+  // An optional effect must never leave the page behind a locked loader.
+  $('.boot')?.remove()
+  $('.hero')?.classList.remove('gl-on')
+  gsap.set('.nav > *, .hero__top > *, .hero__bottom > *', { clearProps: 'transform,opacity' })
+  html.classList.add('is-ready')
+  document.body.classList.remove('is-loading')
+  lenis.start()
+  ScrollTrigger.refresh()
+})
 addEventListener('load', () => ScrollTrigger.refresh())

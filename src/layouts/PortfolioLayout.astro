@@ -1,0 +1,33 @@
+---
+import '../styles/portfolio.css'
+import '../styles/motion-scenes.css'
+const title = 'Amey Shelar — Full Stack Developer & AI/ML Engineer'
+const description = 'Thoughtful interfaces. Dependable foundations. Explore full-stack software, applied AI and connected systems by Amey Shelar.'
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#F2F46B" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%23F2F46B'/%3E%3Cpath d='M14 64 33 16h14l19 48H52l-4-12H31l-4 12Zm21-24h10l-5-15Z' fill='%23321A35'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="wordmark" href="#top" aria-label="Amey Shelar home">AMEY SHELAR<span aria-hidden="true"></span></a>
+      <nav aria-label="Main navigation"><a href="#work">Work</a><a href="#story">Story</a><a class="nav-extended" href="#experience">Experience</a><a class="nav-extended" href="#stack">Stack</a><a class="nav-contact" href="#contact">Let’s talk <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" /></svg></a></nav>
+    </header>
+    <slot />
+    <footer class="site-footer"><a href="#top">AMEY SHELAR</a><span>Built with care. © {new Date().getFullYear()}</span><a class="motion-preference" href="?motion=off">Reduce motion</a><a class="footer-back" href="#top">Back to top <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 21V3m-6 6 6-6 6 6"/></svg></a></footer>
+    <script>import '../scripts/portfolio.js'</script>
+  </body>
+</html>

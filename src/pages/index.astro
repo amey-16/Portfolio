@@ -1,35 +1,37 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import Boot from '../components/Boot.astro'
-import Chrome from '../components/Chrome.astro'
-import Menu from '../components/Menu.astro'
-import Hero from '../components/Hero.astro'
-import Work from '../components/Work.astro'
-import About from '../components/About.astro'
+import { Image } from 'astro:assets'
+import PortfolioLayout from '../layouts/PortfolioLayout.astro'
+import HeroIntro from '../components/motion/HeroIntro'
+import ArchitectureLab from '../components/motion/ArchitectureLab'
+import SystemSequence from '../components/motion/SystemSequence'
+import ProjectVisual from '../components/motion/ProjectVisual'
+import EngineeringPlayground from '../components/motion/EngineeringPlayground'
+import ReleaseLab from '../components/motion/ReleaseLab'
+import Collaboration from '../components/motion/Collaboration'
 import Experience from '../components/Experience.astro'
 import Stack from '../components/Stack.astro'
-import Process from '../components/Process.astro'
-import Words from '../components/Words.astro'
-import Clients from '../components/Clients.astro'
-import Contact from '../components/Contact.astro'
-import Footer from '../components/Footer.astro'
-import CaseStudy from '../components/CaseStudy.astro'
+import portrait from '../../public/amey-editorial.png'
+const projects = [
+  { name: 'VPN Tunneling Dashboard', category: 'Full-stack / Network visibility', class: 'network', headline: 'Make the invisible readable.', description: 'A monitoring interface that brings VPN tunnel activity into one clear view. Graphs and structured tables make IKE and Child SA data easier to inspect.', decision: 'The engineering focus', detail: 'Connect REST API data to an interface that supports real-time network monitoring. Present summary graphs alongside structured records so users can move from an overview to individual tunnel details.', tools: 'React · REST APIs · Data visualization', nodes: ['IKE SA', 'Child SA', 'Tunnel activity'] },
+  { name: 'JATAYU', category: 'Applied AI / Autonomous UAV', class: 'vision', headline: 'From seeing to responding.', description: 'An autonomous UAV project connecting human detection, tracking and stereo-vision navigation with hardware and control logic.', decision: 'Where software meets the physical world', detail: 'Combine OpenCV and NanoDet with depth estimation, MAVLink communication and Raspberry Pi integration. The challenge spans perception, navigation and the control system that connects them.', tools: 'Python · OpenCV · NanoDet · MAVLink', nodes: ['Perception', 'Depth estimation', 'Control'] },
+  { name: 'Retail Optimization Platform', category: 'Product engineering / Retail analytics', class: 'retail', headline: 'Connect the floor to the bigger picture.', description: 'A retail platform that brings analytics and inventory tracking together, helping turn operational data into useful business insight.', decision: 'One connected product', detail: 'Bring a React interface, Node and Express backend, and Supabase data layer into the same product. Computer-vision tooling with YOLO and OpenCV supports the broader retail analytics workflow.', tools: 'React · Node.js · Supabase · YOLO', nodes: ['Store activity', 'Inventory', 'Insights'] },
+]
 ---
-<Layout>
-  <Boot />
-  <Chrome />
-  <Menu />
-  <main>
-    <Hero />
-    <Work />
-    <About />
+<PortfolioLayout>
+  <main id="main">
+    <HeroIntro client:load />
+    <section class="story-section chapter" id="story" aria-labelledby="story-title">
+      <div class="story-opening"><h2 class="display-heading" id="story-title">THE IDEA<br />IS ONLY THE<br /><em>BEGINNING.</em></h2><svg class="story-loop" viewBox="0 0 380 420" fill="none" aria-hidden="true"><path d="M20 12h172c190 0 191 200 27 200S77 405 358 405" /></svg></div>
+      <div class="story-ribbon" aria-hidden="true"><div><span>INTERFACE</span><i></i><span>LOGIC</span><i></i><span>INTELLIGENCE</span><i></i><span>INTERFACE</span></div></div><div class="story-grid"><div class="portrait-wrap"><Image src={portrait} alt="Amey Shelar" widths={[400, 700]} sizes="(max-width: 720px) 100vw, 40vw" format="webp" loading="lazy" /><span class="portrait-caption">Amey, on the other side of the screen.</span></div><div class="story-copy"><h3>I like the part where<br />the pieces connect.</h3><p>An interface that makes a complex system feel simple. An API that gives it structure. A model that turns raw information into a useful next step.</p><p>My work moves between full-stack applications, data and applied AI. From network dashboards to computer vision on a UAV, I’m drawn to engineering that has something practical to do.</p><p>I studied Computer Engineering at Xavier Institute of Engineering. Research and project internships at IIT Bombay, BARC and IBM SkillsBuild have added different perspectives to how I approach a problem.</p><a class="text-link" href="#work">See where that thinking leads <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" /></svg></a></div></div>
+    </section>
+    <SystemSequence client:visible={{ rootMargin: '600px' }} />
+    <section class="architecture-section chapter" id="architecture-lab" aria-labelledby="architecture-title"><div class="chapter-heading"><h2 class="display-heading" id="architecture-title">UNDER THE<br /><em>SURFACE.</em></h2><p class="section-intro">Open the system. Follow a request.<br />Choose a stage to explore what each layer is responsible for.</p></div><ArchitectureLab client:visible={{ rootMargin: '600px' }} /></section>
+    <section class="projects-section chapter" id="work" aria-labelledby="work-title"><div class="chapter-heading"><h2 class="display-heading" id="work-title">REAL PROBLEMS.<br /><em>WORKING</em><br />PARTS.</h2><p class="section-intro">Selected projects across full-stack development, applied AI and connected systems.</p></div><div class="project-list">{projects.map((project, i) => <article class={`project-feature project-${project.class}`}><ProjectVisual client:visible={{ rootMargin: '600px' }} type={project.class} name={project.name} /><div class="project-content"><h3>{project.name}</h3><p class="project-category">{project.category}</p><p class="project-headline">{project.headline}</p><p>{project.description}</p><details class="project-details"><summary>{project.decision}<svg class="disclosure-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h16M12 4v16" /></svg></summary><p>{project.detail}</p></details><p class="project-tools">{project.tools}</p></div></article>)}</div><a class="text-link work-github" href="https://github.com/amey-16" target="_blank" rel="noreferrer">Explore my GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" /></svg></a></section>
+    <section class="playground-section chapter" id="playground" aria-labelledby="playground-title"><div class="chapter-heading"><h2 class="display-heading" id="playground-title">DON’T JUST<br /><em>SCROLL.</em><br />TRY SOMETHING.</h2><p class="section-intro">A few small, interactive studies.<br />Turn a product inside out, follow a grounded answer, or put a person in the loop.</p></div><EngineeringPlayground client:visible={{ rootMargin: '600px' }} /></section>
     <Experience />
     <Stack />
-    <Process />
-    <Words />
-    <Clients />
-    <Contact />
+    <section class="delivery-section chapter" id="delivery" aria-labelledby="delivery-title"><div class="delivery-heading"><h2 class="display-heading" id="delivery-title">BUILT IS GOOD.<br /><em>SHIPPED</em><br />IS BETTER.</h2><div class="delivery-emblem" aria-hidden="true"><i /><i /><i /></div></div><p class="delivery-intro">The last mile deserves as much thought as the first screen. Follow a release from implementation to a checked, reviewable delivery.</p><ReleaseLab client:visible={{ rootMargin: '600px' }} /></section>
+    <section class="decisions-section chapter" aria-labelledby="decisions-title"><div><h2 id="decisions-title">The decisions<br />behind the <em>details.</em></h2><p>Some principles I bring to the table.</p></div><div class="principle-list"><details open><summary>Simple until it shouldn’t be.<svg class="disclosure-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h16M12 4v16" /></svg></summary><p>Choose a clear data model and a small set of reliable tools. Add complexity when the problem earns it.</p></details><details><summary>AI needs a reason.<svg class="disclosure-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h16M12 4v16" /></svg></summary><p>Start with the task and a baseline. Evaluate whether a model improves the outcome, and make its limits visible to the person using it.</p></details><details><summary>The person is part of the system.<svg class="disclosure-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h16M12 4v16" /></svg></summary><p>Loading, failure, recovery and accessibility belong in the design from the beginning. They are part of how a product earns trust.</p></details><details><summary>Leave the next person a map.<svg class="disclosure-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h16M12 4v16" /></svg></summary><p>Document the decisions, make the boundaries clear, and leave a codebase that another person can understand and extend.</p></details></div></section>
+    <Collaboration client:idle email="ameys436@gmail.com" github="https://github.com/amey-16" linkedin="https://linkedin.com/in/amey-shelar123" />
   </main>
-  <Footer />
-  <CaseStudy />
-</Layout>
+</PortfolioLayout>
