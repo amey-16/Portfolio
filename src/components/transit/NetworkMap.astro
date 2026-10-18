@@ -1,0 +1,81 @@
+---
+import { lines, interchanges, geometry, stations, capsules } from '../../data/transit'
+const byId = Object.fromEntries(interchanges.map((i) => [i.id, i]))
+---
+<div class="network" data-network>
+  <div class="network__legend" role="group" aria-label="Choose a skill line">
+    {lines.map((line) => (
+      <button type="button" class="line-key" data-line={line.id} aria-pressed="false" style={`--line:${line.color}`}>
+        <i aria-hidden="true"></i><span>{line.name}</span>
+      </button>
+    ))}
+  </div>
+
+  <div class="network__stage">
+    <svg class="network__map" viewBox="0 160 1600 340" role="img" aria-labelledby="network-desc">
+      <desc id="network-desc">Transit diagram of Amey's skills. Four lines, Frontend, Backend, Data and AI/ML, meet at the Retail Platform and pair up at BARC, IBM SkillsBuild, VPN Dashboard and JATAYU.</desc>
+      <g class="network__lines">
+        {lines.map((line) => (
+          <g class="route" data-route={line.id} style={`--line:${line.color}`}>
+            <path class="route__path" d={geometry[line.id]} pathLength="1" />
+            {geometry.swap[line.id] && <path class="route__path route__swap" d={geometry.swap[line.id]} pathLength="1" />}
+          </g>
+        ))}
+      </g>
+      <g class="network__stations">
+        {stations.map(([line, label, x, y, side]) => (
+          <g class="station" data-route={line} style={`--line:var(--${line === 'frontend' ? 'red' : line === 'backend' ? 'blue' : line === 'data' ? 'amber' : 'green'})`}>
+            <line x1={x} x2={x} y1={side === 'above' ? y - 11 : y} y2={side === 'above' ? y : y + 11} />
+            <text x={x} y={side === 'above' ? y - 18 : y + 31} text-anchor="middle">{label}</text>
+          </g>
+        ))}
+      </g>
+      <g class="network__capsules">
+        {capsules.map(([id, x, top, h, labelY, w]) => (
+          <g class="capsule" data-capsule={id} data-serves={byId[id].lines.join(' ')} tabindex="0" role="button" aria-label={`${byId[id].full}: ${byId[id].kind}`}>
+            <rect x={x - w / 2} y={top} width={w} height={h} rx={Math.min(w, h) / 2} />
+            <text x={x} y={labelY} text-anchor="middle">{byId[id].name}</text>
+          </g>
+        ))}
+      </g>
+    </svg>
+  </div>
+
+  <aside class="network__board" aria-live="polite">
+    <div class="board__default" data-board="default">
+      <p class="board__title">All lines running</p>
+      <p>Choose a line to follow one skill set end to end, or select an interchange to see what was built there.</p>
+    </div>
+    {lines.map((line) => (
+      <div class="board__line" data-board={line.id} hidden style={`--line:${line.color}`}>
+        <p class="board__title board__title--line"><i aria-hidden="true"></i>{line.name} line</p>
+        <p class="board__summary">{line.summary}</p>
+        <ol class="board__stops">{line.skills.map((s) => <li>{s}</li>)}</ol>
+        <p class="board__serves">Interchanges: {interchanges.filter((i) => i.lines.includes(line.id)).map((i) => i.name).join(' · ')}</p>
+      </div>
+    ))}
+    {interchanges.map((i) => (
+      <div class="board__line" data-board={`x-${i.id}`} hidden>
+        <p class="board__title">{i.full}</p>
+        <p class="board__kind">{i.kind}</p>
+        <p>{i.note}</p>
+        <p class="board__roundels">{i.lines.map((l) => <i style={`--line:${lines.find((x) => x.id === l).color}`} title={lines.find((x) => x.id === l).name}></i>)}<span>{i.lines.map((l) => lines.find((x) => x.id === l).name).join(' + ')}</span></p>
+        {i.slug && <a class="board__link" href={`/work/${i.slug}/`}>Open the case study <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7" /></svg></a>}
+      </div>
+    ))}
+  </aside>
+
+  <!-- Narrow screens: one corridor at a time instead of a shrunken map -->
+  <div class="corridor">
+    {lines.map((line) => (
+      <div class="corridor__line" data-corridor={line.id} style={`--line:${line.color}`}>
+        <p class="corridor__name">{line.name}</p>
+        <ol>
+          {line.skills.slice(0, 3).map((s) => <li>{s}</li>)}
+          {interchanges.filter((i) => i.lines.includes(line.id)).map((i) => <li class="is-interchange">{i.slug ? <a href={`/work/${i.slug}/`}>{i.name}</a> : i.name}<small>{i.kind}</small></li>)}
+          {line.skills.slice(3).map((s) => <li>{s}</li>)}
+        </ol>
+      </div>
+    ))}
+  </div>
+</div>

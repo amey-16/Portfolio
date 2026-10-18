@@ -1,0 +1,97 @@
+/* ==========================================================================
+   Director — the motion system that sits on top of the sections.
+   One idea runs through it: NOISE resolves into SIGNAL. Every transition is
+   the same gesture at a different scale: something unresolved becomes clear.
+   ========================================================================== */
+
+/* ---------- Intro: a stick figure assembles the name ---------- */
+.intro { position: fixed; inset: 0; z-index: 120; display: none; background: #0c0d12; color: #F4F4F8; touch-action: none; overflow: hidden; }
+.is-loading .intro { display: block; }
+.is-loading, .is-loading body { overflow: hidden; }
+.intro__stage { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.intro__half { position: absolute; inset: 0; will-change: transform; }
+.intro__skip { position: absolute; z-index: 2; right: var(--pad); bottom: 24px; display: inline-flex; gap: 10px; align-items: center; min-height: 44px; padding: 0 18px; border: 1px solid rgba(244, 241, 234, .3); border-radius: 999px; background: rgba(12, 13, 18, .35); color: #F4F4F8; font: 500 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; transition: background-color .3s, color .3s; }
+.intro__skip:hover, .intro__skip:focus-visible { background: #fff; color: #0c0d12; }
+
+/* ---------- Page wipe: moving between pages ---------- */
+.wipe { position: fixed; inset: 0; z-index: 110; display: grid; place-items: center; background: var(--wipe-bg, #005F73); color: var(--wipe-fg, #001219); pointer-events: none; clip-path: inset(100% 0 0 0); }
+.wipe__label { font: 900 clamp(38px, 9vw, 150px)/.86 var(--wide); font-stretch: 125%; letter-spacing: -.04em; text-transform: uppercase; text-align: center; padding: 0 var(--pad); text-wrap: balance; overflow: hidden; }
+.wipe__label span { display: block; transform: translateY(110%); }
+.wipe small { position: absolute; left: var(--pad); bottom: 24px; font: 500 12px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+.wipe.is-in { pointer-events: all; animation: wipeIn .8s cubic-bezier(.76, 0, .24, 1) forwards; }
+.wipe.is-in .wipe__label span { animation: wipeTxt .7s .25s cubic-bezier(.16, 1, .3, 1) forwards; }
+@keyframes wipeIn { to { clip-path: inset(0 0 0 0); } }
+@keyframes wipeTxt { to { transform: translateY(0); } }
+.wipe-on .wipe { clip-path: inset(0); }
+.wipe-on .wipe__label span { transform: none; }
+.wipe.is-out { animation: wipeOut .9s cubic-bezier(.76, 0, .24, 1) forwards; }
+@keyframes wipeOut { from { clip-path: inset(0); } to { clip-path: inset(0 0 100% 0); } }
+
+/* ---------- Iris: the badge dot opens into the portrait ---------- */
+.iris { position: fixed; inset: 0; z-index: 4; pointer-events: none; background: #2B35D8; clip-path: circle(0% at 50% 58%); visibility: hidden; }
+
+/* ---------- Veil: the sheet underneath sinks into shadow as the next one lands ---------- */
+.veil { position: absolute; inset: 0; z-index: 6; background: #000; opacity: 0; pointer-events: none; border-radius: inherit; }
+
+/* ---------- Chapter HUD ---------- */
+.chap { position: fixed; left: 50%; translate: -50% 0; bottom: 22px; z-index: 48; display: none; align-items: center; gap: 14px; color: #fff; mix-blend-mode: difference; font: 500 12px var(--mono); letter-spacing: .06em; text-transform: uppercase; pointer-events: none; transition: opacity .5s var(--ease); }
+.has-fine .chap { display: flex; }
+.chap.is-off { opacity: 0; }
+.chap__n { font-variant-numeric: tabular-nums; }
+.chap__roll { position: relative; display: block; height: 1.2em; min-width: 11ch; overflow: hidden; }
+.chap__roll b { position: absolute; left: 0; top: 0; font-weight: 500; white-space: nowrap; }
+.chap__thread { position: relative; width: 84px; height: 1px; background: rgba(255, 255, 255, .35); }
+.chap__thread i { position: absolute; inset: 0; background: #fff; transform-origin: 0 50%; transform: scaleX(0); }
+.chap__pct { font-variant-numeric: tabular-nums; min-width: 4ch; }
+body.interior .chap { display: none; }
+
+/* ---------- Headings: noise resolves, the letterforms breathe open ---------- */
+.is-motion h2.wide .ln__in { will-change: transform; }
+@media (min-width: 720px) { .is-motion h2.wide:not(.contact__title) .ln__in { white-space: nowrap; } }
+.is-motion h2.wide .ch { display: inline-block; }
+
+/* ---------- Footer uncover: the last sheet lifts away to reveal the sign-off ---------- */
+@media (min-width: 900px) {
+  .is-motion.has-uncover main { position: relative; z-index: 2; margin-bottom: var(--foot-h, 0px); }
+  .is-motion.has-uncover .foot { position: fixed; left: 0; right: 0; bottom: 0; z-index: 1; background: var(--bg); }
+}
+
+/* ---------- Work: titles open up on hover ---------- */
+.is-motion .proj__title { transition: font-stretch .7s var(--ease), letter-spacing .7s var(--ease); }
+.has-fine .proj__inner:hover .proj__title { font-stretch: 98%; letter-spacing: -.01em; }
+
+@media (max-width: 720px) { .chap__thread, .chap__pct { display: none; } .chap { bottom: 14px; } }
+@media (prefers-reduced-motion: reduce) { .intro, .wipe, .iris, .chap { display: none !important; } }
+.is-quiet .intro, .is-quiet .wipe, .is-quiet .iris, .is-quiet .chap { display: none !important; }
+.wipe.is-done { display: none; }
+
+/* Iris curtain: leaving opens a circle from the click; arriving opens a hole in the middle of the screen */
+.wipe-lead { position: fixed; inset: 0; z-index: 109; pointer-events: none; clip-path: circle(0px at 50% 50%); }
+.wipe-iris .wipe { --ir: 0px; -webkit-mask: radial-gradient(circle at 50% 50%, transparent var(--ir), #000 calc(var(--ir) + 1px)); mask: radial-gradient(circle at 50% 50%, transparent var(--ir), #000 calc(var(--ir) + 1px)); }
+.wipe-iris .wipe small { opacity: 0; }
+.has-uncover .contact.sheet { border-radius: var(--r); }
+
+/* ---------- Selected Work: square cursor ---------- */
+.sqc { position: fixed; left: 0; top: 0; z-index: 85; pointer-events: none; opacity: 0; transition: opacity .3s var(--ease); }
+.sqc.is-on { opacity: 1; }
+.sqc i { position: absolute; left: -13px; top: -13px; width: 26px; height: 26px; border: 1.5px solid #EAF1FF; border-radius: 3px; mix-blend-mode: difference; transition: width .55s var(--ease), height .55s var(--ease), left .55s var(--ease), top .55s var(--ease), border-radius .55s var(--ease), background-color .35s, border-color .35s; }
+.sqc svg { position: absolute; left: -12px; top: -12px; width: 24px; height: 24px; fill: none; stroke: #06112B; stroke-width: 1.8; opacity: 0; transform: scale(.4) rotate(-45deg); transition: opacity .3s, transform .55s var(--ease); }
+.sqc.is-link i { width: 78px; height: 78px; left: -39px; top: -39px; border-radius: 50%; background: #EAF1FF; border-color: #EAF1FF; mix-blend-mode: normal; }
+.sqc.is-link svg { opacity: 1; transform: none; }
+.in-work .cursor { opacity: 0; }
+.in-work .work, .in-work .work a { cursor: none; }
+
+/* ---------- Selected Work: cards reveal their detail on hover ---------- */
+.has-fine .proj__text > p:not(.proj__thesis), .has-fine .proj__text .tags, .has-fine .proj__go { opacity: 0; transform: translateY(14px); transition: opacity .5s var(--ease), transform .6s var(--ease); }
+.has-fine .proj__inner:hover .proj__text > p:not(.proj__thesis), .has-fine .proj__inner:focus-visible .proj__text > p:not(.proj__thesis),
+.has-fine .proj__inner:hover .proj__text .tags, .has-fine .proj__inner:focus-visible .proj__text .tags,
+.has-fine .proj__inner:hover .proj__go, .has-fine .proj__inner:focus-visible .proj__go { opacity: 1; transform: none; }
+.has-fine .proj__inner:hover .proj__text .tags { transition-delay: .06s; }
+.has-fine .proj__inner:hover .proj__go { transition-delay: .12s; }
+.proj .art > svg { transition: filter .6s var(--ease); }
+.has-fine .proj__inner:hover .art > svg { filter: saturate(1.15); }
+
+/* heading lines: each rises out of its own mask */
+.ln { display: block; overflow: hidden; overflow: visible clip; padding: .06em .04em .1em; margin: -.06em -.04em -.1em; }
+.ln__in { display: block; }
+.sqc svg { max-width: none; }

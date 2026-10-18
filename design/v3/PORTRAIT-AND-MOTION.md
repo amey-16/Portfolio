@@ -2,6 +2,8 @@
 
 11 October 2026. This revision extends The Living Exhibition in response to the request for a prominent photo section and more explicit motion graphics. **Design only; implementation still awaits approval.**
 
+The [code-native motion contract](CODE-NATIVE-DESIGN.md) is binding for implementation: the portrait is the intentional photograph; the sculpture, project exhibits, vision sample, connector, and other motion graphics are generated in browser code. The boards here are composition references.
+
 ## Visuals to approve
 
 - [Full website with photo section](05-complete-scroll-with-portrait.png)

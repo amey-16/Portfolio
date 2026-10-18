@@ -2,7 +2,7 @@
 
 Design proposal, 11 October 2026. **Awaiting approval.** The existing application has not been redesigned in this round. These are visual concepts and proposed behaviors, not a running website or measured performance results.
 
-**Latest revision:** read [Portrait and motion revision](PORTRAIT-AND-MOTION.md) first. It adds a dedicated photo chapter, updates the page to ten chapters, and specifies the animated component states. Its sequence and new boards supersede the nine-chapter overview below; all other content protections and technical constraints remain in force.
+**Latest revision:** read the [code-native motion contract](CODE-NATIVE-DESIGN.md) and [portrait and motion revision](PORTRAIT-AND-MOTION.md) first. The former specifies live browser rendering, and the latter adds a dedicated photo chapter and updates the page to ten chapters. They supersede conflicting details in this earlier overview.
 
 ## The idea
 
@@ -81,7 +81,7 @@ Small controls: 160–240ms. Scene changes: 550–900ms. Shared project transiti
 
 **Framer Motion / Motion for React:** local interactive state, layout transitions, pointer response, and presence. **GSAP:** the coordinated intro and scroll narrative where a timeline is useful. Each animated property has one owner; both libraries must not write to the same transform. Existing protected sections retain their current controllers.
 
-One carefully bounded WebGL assembly is proposed for the opening and its immediate story continuation, using an authored model, baked material detail, and restrained lighting. This is the main production cost and visual risk. CSS/SVG/canvas and optimized illustrations handle other scenes. The silver object is not to be recreated as a stack of generic CSS rectangles.
+One carefully bounded Three.js assembly is proposed for the opening and its immediate story continuation, using authored procedural geometry, materials, and restrained lighting. SVG/canvas and code-generated geometry handle the other scenes. See the code-native motion contract; the concept boards are not production assets.
 
 ## Useful interactions
 
@@ -99,7 +99,7 @@ Mobile is recomposed, not shrunk. Headline comes before the sculpture; project s
 
 Reduced-motion mode: skip the animated intro, show stable final scene poses, remove magnetic movement and camera movement, keep all reading and controls. Content renders visibly before animation enhancement. Touch devices do not pay for cursor effects. Native scrolling remains the baseline.
 
-Proposed engineering targets, not current measured results: LCP ≤2.5s, CLS ≤0.1, INP ≤200ms on a defined representative device/network profile. Target initial nonessential JS below 200KB compressed, with WebGL loaded after meaningful text/CTA and an optimized poster. Load only the visible scene, pause off-screen rendering, cap device pixel ratio, and provide a static fallback when rendering fails. Actual protected-section costs must be measured; extra motion gets reduced before their behavior changes.
+Proposed engineering targets, not current measured results: LCP ≤2.5s, CLS ≤0.1, INP ≤200ms on a defined representative device/network profile. Target initial nonessential JS below 200KB compressed, with WebGL loaded after meaningful text/CTA. Load only the visible scene, pause off-screen rendering, cap device pixel ratio, and provide a CSS/SVG fallback when rendering fails. Actual protected-section costs must be measured; extra motion gets reduced before their behavior changes.
 
 The previous distorted opening is a required implementation test case. Headings must render as one semantic text layer, have bounded responsive sizes, and never depend on animation completion to become legible. Any split-letter animation is decorative and cleaned up safely. Verify direct entry, hard reload, restored scroll, slow fonts, resize, mobile, reduced motion, and absent WebGL. This is a plan, not a claim that the deployed bug has been fixed in this design-only round.
 

@@ -1,0 +1,52 @@
+---
+// Authored diagrams for each project, drawn in the transit grammar.
+// They illustrate the system shape, not real data.
+const { kind } = Astro.props
+---
+<figure class={`art art--${kind}`}>
+  {kind === 'network' && (
+    <svg viewBox="0 0 600 440" aria-hidden="true">
+      <g class="art__grid"><path d="M0 110H600M0 220H600M0 330H600M150 0V440M300 0V440M450 0V440" /></g>
+      <g class="art__node"><rect x="40" y="150" width="96" height="140" rx="48" /><text x="88" y="320" text-anchor="middle">Site A</text></g>
+      <g class="art__node"><rect x="464" y="150" width="96" height="140" rx="48" /><text x="512" y="320" text-anchor="middle">Site B</text></g>
+      <path class="art__tunnel" d="M136 176H464M136 264H464" />
+      <path class="art__line" style="--c:var(--red)" d="M88 196H512" pathLength="1" />
+      <path class="art__line" style="--c:var(--amber)" d="M88 220H240L262 242H338L360 220H512" pathLength="1" />
+      <path class="art__line" style="--c:var(--blue)" d="M88 244H512" pathLength="1" />
+      <g class="art__pkt"><circle cx="180" cy="196" r="7" /><circle cx="300" cy="242" r="7" /><circle cx="420" cy="244" r="7" /></g>
+      <text class="art__tag" x="300" y="160" text-anchor="middle">IKE SA · CHILD SA</text>
+      <g class="art__bars">{[54, 82, 38, 96, 70, 110, 64, 88, 120, 76].map((h, i) => <rect x={64 + i * 48} y={420 - h * .7} width="28" height={h * .7} />)}</g>
+      <path class="art__axis" d="M50 420H560" />
+      <g class="art__rows"><path d="M40 40H560M40 64H560M40 88H560" /><rect x="40" y="34" width="12" height="12" style="fill:var(--red)" /><rect x="40" y="58" width="12" height="12" style="fill:var(--amber)" /><rect x="40" y="82" width="12" height="12" style="fill:var(--blue)" /></g>
+    </svg>
+  )}
+  {kind === 'vision' && (
+    <svg viewBox="0 0 600 440" aria-hidden="true">
+      <g class="art__grid"><path d="M0 110H600M0 220H600M0 330H600M150 0V440M300 0V440M450 0V440" /></g>
+      <path class="art__frame" d="M40 70V40H70M530 40H560V70M560 370V400H530M70 400H40V370" />
+      <g class="art__figure"><circle cx="300" cy="150" r="30" /><path d="M252 330V230Q252 196 300 196Q348 196 348 230V330Z" /><path d="M270 330V390M330 330V390" /></g>
+      <rect class="art__box" x="228" y="104" width="144" height="296" />
+      <g class="art__boxlabel"><rect x="228" y="80" width="96" height="24" /><text x="238" y="97">PERSON</text></g>
+      <g class="art__stereo"><rect x="58" y="300" width="36" height="24" rx="4" /><rect x="58" y="346" width="36" height="24" rx="4" /><path class="art__ray" d="M94 312L228 250M94 358L228 300" /></g>
+      <text class="art__tag" x="56" y="292">STEREO DEPTH</text>
+      <path class="art__line" style="--c:var(--green)" d="M372 250H430L470 210H560" pathLength="1" />
+      <path class="art__line" style="--c:var(--blue)" d="M372 280H440L480 320H560" pathLength="1" />
+      <g class="art__drone" transform="translate(500 120)"><path d="M-34 -34L34 34M34 -34L-34 34" /><circle cx="-34" cy="-34" r="14" /><circle cx="34" cy="-34" r="14" /><circle cx="-34" cy="34" r="14" /><circle cx="34" cy="34" r="14" /><rect x="-12" y="-12" width="24" height="24" rx="4" /></g>
+      <text class="art__tag" x="472" y="344">MAVLINK</text>
+    </svg>
+  )}
+  {kind === 'retail' && (
+    <svg viewBox="0 0 600 440" aria-hidden="true">
+      <g class="art__grid"><path d="M0 110H600M0 220H600M0 330H600M150 0V440M300 0V440M450 0V440" /></g>
+      <rect class="art__floor" x="40" y="40" width="380" height="360" />
+      <g class="art__shelves">{[0, 1, 2].map((r) => [0, 1].map((c) => <rect x={84 + c * 170} y={84 + r * 104} width="122" height="40" />))}</g>
+      <path class="art__line" style="--c:var(--red)" d="M60 380H226V320L250 296V176L226 152V60" pathLength="1" />
+      <g class="art__heat"><circle cx="226" cy="320" r="18" /><circle cx="250" cy="236" r="26" /><circle cx="226" cy="152" r="14" /></g>
+      <g class="art__cam"><path d="M48 48l22 0-6 12zM412 48l-22 0 6 12z" /></g>
+      <text class="art__tag" x="440" y="62">INVENTORY</text>
+      <g class="art__inv">{[0.86, 0.42, 0.68, 0.24, 0.92].map((v, i) => <g><rect class="art__track" x="440" y={84 + i * 52} width="120" height="14" /><rect x="440" y={84 + i * 52} width={120 * v} height="14" style={`fill:var(--${v < .3 ? 'red' : v < .5 ? 'amber' : 'green'})`} /></g>)}</g>
+      <path class="art__line" style="--c:var(--blue)" d="M420 220H440" pathLength="1" />
+    </svg>
+  )}
+  <figcaption>Illustration</figcaption>
+</figure>

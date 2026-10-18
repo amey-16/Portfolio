@@ -16,7 +16,7 @@ Present Amey Shelar as a Senior Full Stack Developer & AI/ML Engineer through a 
 
 ## Capabilities and Constraints
 
-- Current status (2026-10-11): the user superseded Build Sequence with a new design-first redesign. Study the supplied reference sites, present complete visual boards and a motion plan, and obtain approval before changing production website code. The old implementation is a draft, not the accepted design.
+- Current status (2026-10-11): the user explicitly approved implementation with “make this website now” after reviewing the Living Exhibition and framed studio portrait proposal. Build the complete code-native website with purposeful motion, great scrolling and useful interactions.
 - Historical: Build Sequence was approved for implementation on 2026-10-10; that visual approval is superseded by the latest request.
 - Preserve the existing Experience and Tech Stack content, structure and interactions. The user now explicitly authorizes matching their colors to the approved palette.
 - Replace the Process section entirely. Redesign Clients & Collaborators to explain useful collaboration context.
@@ -41,12 +41,13 @@ Present Amey Shelar as a Senior Full Stack Developer & AI/ML Engineer through a 
 ## Open Decisions
 
 - Approval presentation is confirmed: a visual concept image plus a written architecture and motion plan.
-- Latest design revision requires a prominent real-photo chapter and explicit animated-component states. The user authorizes editing their photo to match the design. Use the original blue-shirt photo under photos mine as the identity source; proposed edited assets and boards are in design/v3/PORTRAIT-AND-MOTION.md. Approval is still pending.
+- The prominent portrait chapter uses the framed studio photo and composition in design/v3/PORTRAIT-SPREAD.md. The user approved moving to implementation after seeing that proposal. The original blue-shirt photo remains the identity source and is preserved.
+- The user explicitly requires the visual scenes to be built with JavaScript/Three.js/SVG/CSS rather than using generated image sections. The only intended photographic page asset is their portrait. The binding implementation breakdown is design/v3/CODE-NATIVE-DESIGN.md. The concept PNGs are visual references, not assets to ship.
 - Availability and project-specific public repository/demo links remain unconfirmed. Do not invent them.
 
 ## Latest Motion Direction
 
-The user rejected the current template and requested a fresh, highly creative, professional design across the entire site, with essential motion graphics. The new proposal is in design/v3/PROPOSAL.md with three generated design boards. It is awaiting approval; do not treat the proposed Living Exhibition direction as approved or resume implementation automatically. Preserve reduced-motion reading, mobile controls, and the protected sections.
+The approved Living Exhibition direction is documented in design/v3/PROPOSAL.md, with the code-native contract and framed portrait revision taking precedence. Implementation is now authorized. Preserve reduced-motion reading, mobile controls, and the protected sections. No generated board may ship as a section or animation; only the portrait is a photographic asset.
 
 ## Product Principles
 

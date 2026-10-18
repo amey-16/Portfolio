@@ -1,0 +1,86 @@
+---
+import '@fontsource-variable/big-shoulders-display'
+import '@fontsource/barlow/400.css'
+import '@fontsource/barlow/500.css'
+import '@fontsource/barlow/600.css'
+import '@fontsource/barlow-semi-condensed/500.css'
+import '@fontsource/barlow-semi-condensed/600.css'
+import '../styles/transit.css'
+import Roundel from '../components/transit/Roundel.astro'
+import { profile } from '../data/transit'
+
+const {
+  title = 'Amey Shelar — Full-stack developer & AI/ML engineer',
+  description = 'Amey Shelar builds full-stack applications, data dashboards and applied AI systems. React, Node.js, Python, computer vision. Research intern at IIT Bombay.',
+  interior = false,
+} = Astro.props
+const home = interior ? '/' : ''
+const stops = [['top', 'Central'], ['network', 'Skill network'], ['work', 'Work'], ['photo', 'Portrait'], ['journey', 'Journey'], ['contact', 'Contact']]
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#1B1D22" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B1D22'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%23fff' stroke-width='7'/%3E%3Cpath d='M6 32h14' stroke='%239C3B2E' stroke-width='7'/%3E%3Cpath d='M44 32h14' stroke='%23C29A5B' stroke-width='7'/%3E%3C/svg%3E" />
+  <title>{title}</title>
+  <script is:inline>
+    (function () {
+      var q = new URLSearchParams(location.search)
+      var quiet = q.get('motion') === 'off' || matchMedia('(prefers-reduced-motion: reduce)').matches
+      document.documentElement.classList.add(quiet ? 'is-quiet' : 'is-motion')
+    })()
+  </script>
+</head>
+<body class:list={{ interior }}>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="sign">
+    <a class="sign__mark" href={`${home}#top`} aria-label="Amey Shelar, home"><Roundel /><span>Amey Shelar</span></a>
+    <nav class="sign__nav" aria-label="Main">
+      <a href={`${home}#network`}>Skills</a>
+      <a href={`${home}#work`}>Work</a>
+      <a href={`${home}#photo`}>Portrait</a>
+      <a href={`${home}#journey`}>Journey</a>
+    </nav>
+    <a class="btn btn--red sign__cta" href={`${home}#contact`}>Plan a project<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7" /></svg></a>
+    <button class="sign__menu" type="button" aria-expanded="false" aria-controls="menu"><span>Menu</span><i aria-hidden="true"></i></button>
+  </header>
+
+  <nav class="menu" id="menu" aria-label="All sections" hidden>
+    <ol>
+      {stops.map(([id, name], i) => <li style={`--i:${i}`}><a href={`${home}#${id}`}><i aria-hidden="true"></i>{name}</a></li>)}
+    </ol>
+    <p><a href={`mailto:${profile.email}`}>{profile.email}</a></p>
+  </nav>
+
+  {!interior && (
+    <nav class="rail" aria-label="Page route">
+      <span class="rail__track" aria-hidden="true"><i></i></span>
+      <ol>{stops.map(([id, name]) => <li><a href={`#${id}`} data-stop={id}><i aria-hidden="true"></i><span>{name}</span></a></li>)}</ol>
+    </nav>
+  )}
+
+  <slot />
+
+  <footer class="terminus">
+    <div class="terminus__lines" aria-hidden="true"><i style="--line:var(--red)"></i><i style="--line:var(--blue)"></i><i style="--line:var(--amber)"></i><i style="--line:var(--green)"></i></div>
+    <div class="terminus__row">
+      <p class="terminus__name">Amey Shelar</p>
+      <ul>
+        <li><a href={`mailto:${profile.email}`}>Email</a></li>
+        <li><a href={profile.github} target="_blank" rel="noreferrer">GitHub</a></li>
+        <li><a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a></li>
+        <li><a href="?motion=off" class="terminus__quiet">Reduce motion</a></li>
+        <li><a href={`${home}#top`}>Back to top</a></li>
+      </ul>
+      <p class="terminus__copy">© {new Date().getFullYear()} · Designed and built by Amey</p>
+    </div>
+  </footer>
+  <script>import '../scripts/transit.js'</script>
+</body>
+</html>

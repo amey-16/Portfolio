@@ -1,0 +1,53 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro'
+import ProjectArt from '../../components/site/ProjectArt.astro'
+import { projects } from '../../data/projects'
+
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }))
+}
+const { project } = Astro.props
+const index = projects.findIndex((p) => p.slug === project.slug)
+const next = projects[(index + 1) % projects.length]
+const pad = (n) => String(n).padStart(2, '0')
+const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg>'
+---
+<SiteLayout title={`${project.name} — Amey Shelar`} description={project.intro} interior>
+  <main id="main" class="case">
+    <section class={`case__open ${['t-verm', 't-cobalt', 't-bone'][index % 3]}`}>
+      <a class="case__back" href="/#work" data-wipe="All work"><Fragment set:html={arrow} />All work</a>
+      <h1 class="case__title">{project.name}</h1>
+      <p class="case__thesis">{project.title}</p>
+      <p class="case__meta"><span class="mono">{pad(index + 1)} / {pad(projects.length)}</span><span class="mono">{project.discipline}</span></p>
+      <div class="case__grid">
+        <div class="case__intro">
+          <p>{project.intro}</p>
+          <ul class="tags">{project.tools.map((t) => <li>{t}</li>)}</ul>
+        </div>
+        <div class="case__art"><ProjectArt kind={project.kind} /></div>
+      </div>
+    </section>
+
+    <section class="case__block t-bone">
+      <h2 class="wide wide--sm">The problem</h2>
+      <p class="case__text">{project.challenge}</p>
+    </section>
+
+    <section class="case__block t-butter">
+      <h2 class="wide wide--sm">How it was built</h2>
+      <ol class="case__steps">
+        {project.approach.map((step, i) => <li><span class="mono">{pad(i + 1)}</span><span>{step}</span></li>)}
+      </ol>
+    </section>
+
+    <section class="case__block t-ink">
+      <h2 class="wide wide--sm">The takeaway</h2>
+      <p class="case__text">{project.takeaway}</p>
+    </section>
+
+    <a class="case__next t-verm" href={`/work/${next.slug}/`} data-cursor="Next" data-wipe={next.name}>
+      <strong>{next.name}<Fragment set:html={arrow} /></strong>
+      <small class="mono">Next project</small>
+    </a>
+  </main>
+</SiteLayout>

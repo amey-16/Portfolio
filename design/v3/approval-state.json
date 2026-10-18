@@ -1,11 +1,11 @@
 {
-    "status":  "awaiting-user-approval",
-    "proposal":  "design/v3/PORTRAIT-AND-MOTION.md",
+    "status":  "approved-for-implementation",
+    "proposal":  "design/v3/PORTRAIT-SPREAD.md",
     "decisionPayload":  "design/v3/decision.json",
     "decisionUrl":  "http://127.0.0.1:6944/",
     "decisionKey":  "e5c31fb0",
     "seed":  "e4bdcaf2",
     "proposedDirection":  "living-exhibition",
-    "productionCodeChangedThisDesignRound":  false,
-    "note":  "Revised with prominent real-photo chapter and interactive motion state boards. Await explicit approval. Protected sections retain content, structure and behavior; palette only."
+    "productionCodeChangedThisDesignRound":  true,
+    "note":  "User explicitly requested building the website on 2026-10-11. Living Exhibition with framed portrait is approved for implementation. Protected Experience and Stack source content and structure remain intact; palette integration only."
 }

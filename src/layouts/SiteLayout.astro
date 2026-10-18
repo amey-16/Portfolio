@@ -1,0 +1,127 @@
+---
+import '@fontsource-variable/archivo/wdth.css'
+import '@fontsource-variable/geist'
+import '@fontsource-variable/geist-mono'
+import '@fontsource/instrument-serif/latin-400.css'
+import '@fontsource/instrument-serif/latin-400-italic.css'
+import '@fontsource-variable/big-shoulders-display'
+import '@fontsource/bodoni-moda/latin-400.css'
+import '@fontsource/bodoni-moda/latin-500.css'
+import '@fontsource/bodoni-moda/latin-400-italic.css'
+import '../styles/site.css'
+import '../styles/hero.css'
+import '../styles/director.css'
+import { getImage } from 'astro:assets'
+import portrait from '../assets/amey-portrait-bw.png'
+import { profile } from '../data/site'
+
+const {
+  title = 'Amey Shelar — Full-stack developer & AI/ML engineer',
+  description = 'Amey Shelar builds web apps, data dashboards and computer-vision systems, from the interface down to the model behind it. Research intern at IIT Bombay.',
+  interior = false,
+} = Astro.props
+const home = interior ? '/' : ''
+const wordmarkPhoto = await getImage({ src: portrait, width: 1400, format: 'webp', quality: 80 })
+const nav = [['work', 'Work'], ['experience', 'Experience'], ['stack', 'Stack'], ['contact', 'Contact']]
+const dl = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14" /></svg>'
+const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg>'
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#E9F2EE" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230A0A0A'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Arial Black,Arial' font-weight='900' font-size='34' fill='%23EDEBE6'%3EA%3C/text%3E%3Crect x='44' y='14' width='8' height='8' fill='%23FF4F2B'/%3E%3C/svg%3E" />
+  <title>{title}</title>
+  <script is:inline>
+    (function () {
+      // Motion is on by default. It is turned off only by an explicit choice:
+      // ?motion=off, or the footer toggle (remembered). ?motion=on restores it.
+      var q = new URLSearchParams(location.search), quiet = false
+      try {
+        if (q.get('motion') === 'off') localStorage.setItem('amey-quiet', '1')
+        if (q.get('motion') === 'on') localStorage.removeItem('amey-quiet')
+        quiet = localStorage.getItem('amey-quiet') === '1'
+      } catch (e) { quiet = q.get('motion') === 'off' }
+      var root = document.documentElement
+      root.classList.add(quiet ? 'is-quiet' : 'is-motion')
+      if (quiet) return
+      // Preloader: every load and reload of the home page (not a page-to-page transition), motion allowed.
+      var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
+      try {
+        if (!reduce && location.pathname === '/' && !sessionStorage.getItem('amey-wipe')) { root.classList.add('is-loading'); if ('scrollRestoration' in history) history.scrollRestoration = 'manual' }
+        if (!reduce && sessionStorage.getItem('amey-wipe')) {
+          root.classList.add('wipe-on')
+          var wb = sessionStorage.getItem('amey-wipe-bg'), wf = sessionStorage.getItem('amey-wipe-fg')
+          if (wb) root.style.setProperty('--wipe-bg', wb)
+          if (wf) root.style.setProperty('--wipe-fg', wf)
+          if (sessionStorage.getItem('amey-wipe-iris')) root.classList.add('wipe-iris')
+        }
+      } catch (e) {}
+    })()
+  </script>
+</head>
+<body class:list={{ interior }}>
+  <div class="intro" role="presentation">
+    <p class="sr-only">Amey Shelar. Loading the portfolio.</p>
+    <button class="intro__skip" type="button">Skip intro <span aria-hidden="true">→</span></button>
+  </div>
+  <div class="wipe" aria-hidden="true"><p class="wipe__label"><span></span></p><small>Amey Shelar · ©2026</small></div>
+  <div class="chap" aria-hidden="true"><span class="chap__n">01</span><span class="chap__roll"><b>Noise</b></span><span class="chap__thread"><i></i></span><span class="chap__pct">000%</span></div>
+  <script is:inline>
+    // The hero waits on this promise. The intro releases it when the name reaches the header;
+    // the timeout is a fail-safe so a failed script can never hold the page back.
+    (function () {
+      var root = document.documentElement, done
+      window.__pre = new Promise(function (r) { done = r })
+      window.__preDone = done
+      if (!root.classList.contains('is-loading')) { done(); return }
+      setTimeout(function () { root.classList.remove('is-loading'); var i = document.querySelector('.intro'); if (i) i.remove(); done() }, /introSlow/.test(location.search) ? 120000 : 25000)
+    })()
+  </script>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="bar">
+    <a class="bar__mark" href={`${home}#top`} aria-label="Amey Shelar, home"><span>Amey Shelar</span><small>©2026</small></a>
+    <nav class="bar__nav" aria-label="Main">
+      {nav.map(([id, label]) => <a href={`${home}#${id}`} data-roll><span>{label}</span></a>)}
+      <a href={profile.resume} download="Amey-Shelar-Resume.pdf" data-roll class="bar__resume"><span>Resume</span></a>
+    </nav>
+    <button class="bar__menu" type="button" aria-expanded="false" aria-controls="menu"><span>Menu</span><i aria-hidden="true"></i></button>
+  </header>
+  <a class="pill pill--accent bar-cta" href={`${home}#contact`} data-magnetic><span>Let’s talk</span></a>
+
+  <nav class="menu" id="menu" aria-label="All sections" hidden>
+    <ol>
+      {[['top', 'Home'], ...nav].map(([id, label], i) => <li style={`--i:${i}`}><a href={`${home}#${id}`}><small>{String(i + 1).padStart(2, '0')}</small>{label}</a></li>)}
+    </ol>
+    <a class="menu__mail menu__resume" href={profile.resume} download="Amey-Shelar-Resume.pdf">Download resume (PDF)</a>
+    <a class="menu__mail" href={`mailto:${profile.email}`}>{profile.email}</a>
+  </nav>
+
+  <slot />
+
+  <footer class="foot">
+    <div class="foot__row">
+      <a class="foot__link" href={`mailto:${profile.email}`}>Email<Fragment set:html={arrow} /></a>
+      <a class="foot__link" href={profile.resume} download="Amey-Shelar-Resume.pdf">Resume<Fragment set:html={dl} /></a>
+      <a class="foot__link" href={profile.github} target="_blank" rel="noreferrer">GitHub<Fragment set:html={arrow} /></a>
+      <a class="foot__link" href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn<Fragment set:html={arrow} /></a>
+      <a class="foot__link foot__quiet" href="?motion=off" data-quiet-toggle>Reduce motion</a>
+      <a class="foot__link" href={`${home}#top`}>Back to top</a>
+    </div>
+    <p class="foot__word" aria-hidden="true" style={`--photo:url(${wordmarkPhoto.src})`}><span>Amey</span><span>Shelar</span></p>
+    <div class="foot__base"><span>© {new Date().getFullYear()} Amey Shelar</span><span>Designed and built by hand · Astro + GSAP</span></div>
+  </footer>
+
+  <div class="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__label"></span></div>
+  <script>import '../scripts/site-boot.js'</script>
+  <script>import '../scripts/intro.js'</script>
+</body>
+</html>

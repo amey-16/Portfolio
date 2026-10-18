@@ -1,0 +1,105 @@
+/* ==========================================================================
+   Hero — two columns. Copy on the left, the 3D scene on the right.
+   Porcelain, ink and one vermilion accent; Instrument Serif for the voice,
+   Geist for reading and Geist Mono for labels.
+   ========================================================================== */
+.hero {
+  --h-bg: #E9F2EE; --h-ink: #001219; --h-2: rgba(0, 18, 25, .7); --h-3: rgba(0, 18, 25, .52); --h-line: rgba(0, 18, 25, .2);
+  --g1: #005F73; --g2: #0A9396; --g3: #BB3E03; --grad: linear-gradient(100deg, #005F73 0%, #0A9396 100%);
+  --serif: 'Instrument Serif', 'Bodoni Moda', Georgia, serif;
+  position: relative; background: var(--h-bg); color: var(--h-ink);
+}
+.is-motion .hero { height: 560svh; }
+.hero__stage {
+  position: relative; height: 100svh; min-height: 620px; overflow: hidden; isolation: isolate;
+  background:
+    radial-gradient(46% 62% at 76% 52%, rgba(10, 147, 150, .2), transparent 72%),
+    radial-gradient(40% 50% at 96% 8%, rgba(255, 255, 255, .9), transparent 70%),
+    radial-gradient(40% 46% at 0% 100%, rgba(148, 210, 189, .45), transparent 70%),
+    var(--h-bg);
+}
+.is-motion .hero__stage { position: sticky; top: 0; }
+.hero__stage::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: .5;
+  background-image: linear-gradient(rgba(0, 18, 25, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 18, 25, .05) 1px, transparent 1px);
+  background-size: 64px 64px; -webkit-mask-image: radial-gradient(70% 70% at 70% 50%, #000, transparent 100%); mask-image: radial-gradient(70% 70% at 70% 50%, #000, transparent 100%); }
+.hero__gl { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+
+/* ---- copy column ---- */
+.hero__copy {
+  position: absolute; z-index: 2; left: var(--pad); top: 50%; width: min(46vw, 760px); transform: translateY(-46%);
+  display: flex; flex-direction: column; align-items: flex-start;
+}
+.hero__kicker { color: var(--h-3); letter-spacing: .2em; font-size: 11px; margin-bottom: clamp(22px, 4vh, 40px); display: flex; align-items: center; gap: 14px; }
+.hero__kicker::before { content: ''; width: 34px; height: 1px; background: var(--h-ink); }
+.hero__title { font: 400 clamp(54px, 7.3vw, 134px)/.9 var(--serif); letter-spacing: -.028em; color: var(--h-ink); }
+.hl { display: block; overflow: hidden; padding: .04em .12em .12em 0; margin: -.04em 0 -.12em; }
+.hl__in { display: block; white-space: nowrap; will-change: transform; }
+.hero__title em { font-style: italic; letter-spacing: -.035em; padding-right: .08em; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.hero__title b { font-weight: 400; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.hero__title .ch { display: inline-block; will-change: transform; }
+.hero__lede { margin-top: clamp(24px, 4vh, 40px); max-width: 44ch; font: 400 clamp(15px, 1.15vw, 18px)/1.65 var(--sans); color: var(--h-2); }
+.hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 30px; margin-top: clamp(24px, 4vh, 38px); }
+.hero__link { display: inline-flex; align-items: center; gap: 12px; padding: 14px 24px; border-radius: 999px; background: #005F73; color: #fff; text-decoration: none; font: 600 15px var(--sans); box-shadow: 0 10px 30px -12px rgba(0, 95, 115, .7); transition: background-color .35s var(--ease), transform .35s var(--ease), box-shadow .35s; }
+.hero__link:hover { background: #004A5B; transform: translateY(-2px); box-shadow: 0 16px 36px -12px rgba(0, 95, 115, .8); }
+.hero__link svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; transition: transform .45s var(--ease); }
+.hero__link:hover svg { transform: translate(3px, -3px); }
+.hero__link--quiet { padding: 0 0 6px; border-radius: 0; background: none; box-shadow: none; color: var(--h-ink); border-bottom: 1px solid var(--h-ink); }
+.hero__link--quiet:hover { background: none; box-shadow: none; transform: none; color: #BB3E03; border-color: #BB3E03; }
+
+/* ---- captions that replace the copy while the layers separate ---- */
+.hero__cap { position: absolute; z-index: 2; left: var(--pad); top: 50%; width: min(29vw, 470px); height: 220px; margin-top: -110px; pointer-events: none; }
+.hero__cap span { position: absolute; left: 0; top: 0; display: block; font: 400 clamp(28px, 3.1vw, 54px)/1.08 var(--serif); letter-spacing: -.015em; opacity: 0; }
+.hero__cap b { display: block; margin-bottom: 18px; font: 500 11px var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--g3); }
+
+/* ---- bottom rail ---- */
+.hero__rail { position: absolute; z-index: 2; left: var(--pad); right: var(--pad); bottom: 26px; display: flex; align-items: center; gap: 18px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--h-3); }
+.hero__railn { color: var(--h-ink); }
+.hero__railbar { width: clamp(30px, 6vw, 90px); height: 1px; background: var(--h-ink); }
+.hero__railline { position: relative; flex: 1; height: 1px; background: var(--h-line); }
+.hero__railline i { position: absolute; inset: 0; background: var(--grad); transform-origin: 0 50%; transform: scaleX(var(--hp, 0)); }
+.hero__railline::after { content: ''; position: absolute; top: -3px; left: calc(var(--hp, 0) * 100%); width: 7px; height: 7px; margin-left: -3px; border-radius: 50%; background: var(--g3); }
+.hero__steps { display: flex; gap: 22px; }
+.hero__steps em { font-style: normal; transition: color .4s; }
+.hero__steps em.is-on { color: var(--h-ink); }
+.hero__steps em.is-on::before { content: '• '; color: var(--g3); }
+
+/* ---- final frame: the stack has collapsed into one dark panel; real links live on it ---- */
+.hero__final { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: calc(var(--bar) + 20px) var(--pad) 90px; color: #EAF4F1; pointer-events: none; visibility: hidden; }
+.hero.is-dark .hero__final { visibility: visible; }
+.hero__final > p.mono { position: absolute; top: calc(var(--bar) + 24px); left: var(--pad); color: rgba(234, 244, 241, .55); letter-spacing: .14em; }
+.hero__fh { font: 400 clamp(64px, 12.4vw, 230px)/.84 var(--serif); letter-spacing: -.03em; margin: 0 0 clamp(24px, 4vh, 48px); }
+.hero__fh em { letter-spacing: -.04em; padding-right: .06em; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.hero__fs { max-width: 40ch; font: 400 clamp(16px, 1.3vw, 20px)/1.6 var(--sans); color: rgba(234, 244, 241, .7); }
+
+
+.bar__menu { color: inherit; }
+
+/* hold the content hidden until the intro releases it (fails safe after 3.5s) */
+.is-motion:not(.hero-go) .hl__in, .is-motion:not(.hero-go) .hero__kicker, .is-motion:not(.hero-go) .hero__lede, .is-motion:not(.hero-go) .hero__actions,
+.is-motion:not(.hero-go) .hero__rail, .is-motion:not(.hero-go) .hero__gl, .is-motion:not(.hero-go) .bar, .is-motion:not(.hero-go) .bar-cta { opacity: 0; animation: failsafe 0s 3.5s forwards; }
+@keyframes failsafe { to { opacity: 1; } }
+
+/* ---- smaller screens: copy on top, the scene underneath ---- */
+@media (max-width: 899px) {
+  .hero__copy { left: var(--pad); right: var(--pad); width: auto; top: calc(var(--bar) + 18px); transform: none; }
+  .hero__title { font-size: clamp(46px, 14vw, 96px); }
+  .hero__kicker { margin-bottom: 16px; }
+  .hero__lede { display: none; }
+  .hero__actions { margin-top: 18px; }
+  .hero__cap { left: var(--pad); right: var(--pad); width: auto; top: calc(var(--bar) + 20px); margin-top: 0; height: 160px; }
+  .hero__cap span { font-size: clamp(24px, 7vw, 36px); }
+  .hero__steps { display: none; }
+  .hero__final { padding-bottom: 70px; }
+}
+@media (max-height: 700px) and (min-width: 900px) { .hero__lede { display: none; } }
+.is-quiet .hero__cap { display: none; }
+
+.work.sheet { border-top: 1px solid rgba(234, 244, 241, .1); }
+.bar__mark span::first-letter { color: var(--g3); }
+
+.hero.is-dark { --h-ink: #FFFFFF; --h-bg: #057984; --h-2: rgba(234, 244, 241, .7); --h-3: rgba(234, 244, 241, .5); --h-line: rgba(234, 244, 241, .24); }
+.hero.is-dark .hero__stage { background: linear-gradient(135deg, #005F73, #0A9396); }
+.hero.is-dark .hero__stage::before { opacity: 0; }
+.hero__fh em { background: linear-gradient(100deg, #E9D8A6, #F6EBC8); -webkit-background-clip: text; background-clip: text; }
+.hero__title em, .hero__title b { background: none; -webkit-text-fill-color: #BB3E03; color: #BB3E03; }
+.hero__title { font-weight: 400; }

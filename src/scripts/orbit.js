@@ -125,7 +125,7 @@ export function initOrbit(root, { onTool, finePointer, reducedMotion = false }) 
       for (let k = 1; k < pts.length; k++) {
         const a = pts[k - 1], b = pts[k]
         const front = (a[3] + b[3]) / 2
-        ctx.strokeStyle = `rgba(18,18,18,${0.05 + Math.max(0, front) * 0.12})`
+        ctx.strokeStyle = `rgba(199,217,229,${0.05 + Math.max(0, front) * 0.12})`
         ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke()
       }
     }
