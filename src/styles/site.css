@@ -679,3 +679,13 @@ html { scrollbar-color: #2a2a2a var(--bg); scrollbar-width: thin; }
 @media (max-width: 899px) { .about__btns .pill { width: 100%; justify-content: center; } .contact__actions .pill { width: 100%; justify-content: center; } }
 .about .pill--accent { color: #FFF8EA; }
 .contact .pill--accent { color: #141414; }
+
+/* Portrait on phones: the chips are placed against the photo frame, not the whole section, so OpenCV never lands on his face.
+   The frame is the first thing in the stacked layout: 80px from the top, min(page width - padding, 520px) wide, 4:5. */
+@media (max-width: 899px) {
+  .pic__chips li:nth-child(3) {
+    --fw: min(calc(100vw - 2 * var(--pad, 18px)), 520px);
+    left: calc(50% - var(--fw) / 2 + var(--fw) * 0.06);
+    top: calc(80px + var(--fw) * 1.25 * 0.8);
+  }
+}

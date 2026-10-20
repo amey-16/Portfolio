@@ -50,8 +50,11 @@ export async function initHero({ gsap, ScrollTrigger, lenis, motion, fine }) {
   try {
     const { createHeroScene } = await import('./hero-scene.js')
     scene = createHeroScene($('.hero__gl', hero), { animate: motion, lite })
+    // the page loader flows its data into the mouth of this stream, so it needs to know where that is
+    window.__heroEntry = () => scene.entryScreen()
   } catch (err) {
     console.warn('Hero scene unavailable, showing static hero.', err)
+    window.__heroFailed = true
     $('.hero__gl', hero)?.remove()
     root.classList.add('hero-go')
   }
@@ -78,9 +81,12 @@ export async function initHero({ gsap, ScrollTrigger, lenis, motion, fine }) {
   /* ---- intro: lines rise, letters resolve, the signal sweeps in from the left ---- */
   const intro = () => {
     root.classList.add('hero-go')
+    // When the blueprint loader is feeding data into the stream, the stream is revealed from the moment it
+    // becomes visible on screen (not from far off-screen left), so the hand-off has no empty gap.
+    const fed = window.__flowHandoff === true
     const tl = gsap.timeline({ onComplete: () => { lenis?.start(); alive = true } })
-    tl.to($('.hero__gl', hero), { opacity: 1, duration: 1.2, ease: 'power2.out' }, 0)
-    if (scene) tl.fromTo(scene.uniforms.uReveal, { value: 0 }, { value: 1, duration: full ? 3.4 : 2, ease: 'power2.inOut' }, 0)
+    tl.to($('.hero__gl', hero), { opacity: 1, duration: fed ? 0.5 : 1.2, ease: 'power2.out' }, 0)
+    if (scene) tl.fromTo(scene.uniforms.uReveal, { value: fed ? 0.3 : 0 }, { value: 1, duration: fed ? 2.8 : full ? 3.4 : 2, ease: fed ? 'power2.out' : 'power2.inOut' }, 0)
     tl.to(lines, { yPercent: 0, duration: 1.5, ease: 'expo.out', stagger: 0.14 }, 0.15)
     chars.forEach((c, i) => settle(c, 250 + (i % 14) * 38, 620))
     tl.to(rest, { opacity: 1, y: 0, duration: 1.1, stagger: 0.12, ease: 'expo.out' }, 0.9)

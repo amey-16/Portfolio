@@ -4,14 +4,7 @@
    the same gesture at a different scale: something unresolved becomes clear.
    ========================================================================== */
 
-/* ---------- Intro: a stick figure assembles the name ---------- */
-.intro { position: fixed; inset: 0; z-index: 120; display: none; background: #0c0d12; color: #F4F4F8; touch-action: none; overflow: hidden; }
-.is-loading .intro { display: block; }
-.is-loading, .is-loading body { overflow: hidden; }
-.intro__stage { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.intro__half { position: absolute; inset: 0; will-change: transform; }
-.intro__skip { position: absolute; z-index: 2; right: var(--pad); bottom: 24px; display: inline-flex; gap: 10px; align-items: center; min-height: 44px; padding: 0 18px; border: 1px solid rgba(244, 241, 234, .3); border-radius: 999px; background: rgba(12, 13, 18, .35); color: #F4F4F8; font: 500 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; transition: background-color .3s, color .3s; }
-.intro__skip:hover, .intro__skip:focus-visible { background: #fff; color: #0c0d12; }
+/* ---------- Intro: see blueprint.css ("The Broken Blueprint") ---------- */
 
 /* ---------- Page wipe: moving between pages ---------- */
 .wipe { position: fixed; inset: 0; z-index: 110; display: grid; place-items: center; background: var(--wipe-bg, #005F73); color: var(--wipe-fg, #001219); pointer-events: none; clip-path: inset(100% 0 0 0); }
@@ -61,7 +54,7 @@ body.interior .chap { display: none; }
 .has-fine .proj__inner:hover .proj__title { font-stretch: 98%; letter-spacing: -.01em; }
 
 @media (max-width: 720px) { .chap__thread, .chap__pct { display: none; } .chap { bottom: 14px; } }
-@media (prefers-reduced-motion: reduce) { .intro, .wipe, .iris, .chap { display: none !important; } }
+@media (prefers-reduced-motion: reduce) { .wipe, .iris, .chap { display: none !important; } }
 .is-quiet .intro, .is-quiet .wipe, .is-quiet .iris, .is-quiet .chap { display: none !important; }
 .wipe.is-done { display: none; }
 
@@ -81,13 +74,7 @@ body.interior .chap { display: none; }
 .in-work .cursor { opacity: 0; }
 .in-work .work, .in-work .work a { cursor: none; }
 
-/* ---------- Selected Work: cards reveal their detail on hover ---------- */
-.has-fine .proj__text > p:not(.proj__thesis), .has-fine .proj__text .tags, .has-fine .proj__go { opacity: 0; transform: translateY(14px); transition: opacity .5s var(--ease), transform .6s var(--ease); }
-.has-fine .proj__inner:hover .proj__text > p:not(.proj__thesis), .has-fine .proj__inner:focus-visible .proj__text > p:not(.proj__thesis),
-.has-fine .proj__inner:hover .proj__text .tags, .has-fine .proj__inner:focus-visible .proj__text .tags,
-.has-fine .proj__inner:hover .proj__go, .has-fine .proj__inner:focus-visible .proj__go { opacity: 1; transform: none; }
-.has-fine .proj__inner:hover .proj__text .tags { transition-delay: .06s; }
-.has-fine .proj__inner:hover .proj__go { transition-delay: .12s; }
+/* ---------- Selected Work: the description, tags and link are always visible (no hover needed) ---------- */
 .proj .art > svg { transition: filter .6s var(--ease); }
 .has-fine .proj__inner:hover .art > svg { filter: saturate(1.15); }
 

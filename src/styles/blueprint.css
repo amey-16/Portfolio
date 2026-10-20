@@ -1,0 +1,83 @@
+/* ==========================================================================
+   The Broken Blueprint: the loader.
+   Same identity as the hero it hands over to: warm porcelain, deep ink, teal and one burnt orange.
+   ========================================================================== */
+
+.intro {
+  --bp-bg: #F1EEE4; --bp-mint: #E9F2EE; --bp-ink: #142a31; --bp-teal: #0a7f8a; --bp-orange: #bb3e03;
+  position: fixed; inset: 0; z-index: 120; display: none; overflow: hidden; touch-action: none;
+  background: var(--bp-bg); color: var(--bp-ink);
+}
+.is-loading .intro { display: block; }
+.is-loading, .is-loading body { overflow: hidden; }
+
+/* backdrop: warm off-white drifting to soft mint-grey, with the same grid the hero draws */
+.bp__bg {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(60% 70% at 78% 12%, rgba(255, 255, 255, .85), transparent 70%),
+    radial-gradient(52% 60% at 6% 96%, rgba(148, 210, 189, .34), transparent 70%),
+    radial-gradient(46% 56% at 66% 60%, rgba(10, 147, 150, .10), transparent 72%),
+    var(--bp-bg);
+}
+.bp__bg::before {
+  content: ''; position: absolute; inset: 0; opacity: .55;
+  background-image: linear-gradient(rgba(0, 18, 25, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 18, 25, .05) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(75% 75% at 60% 50%, #000, transparent 100%); mask-image: radial-gradient(75% 75% at 60% 50%, #000, transparent 100%);
+}
+.bp__bg::after { content: ''; position: absolute; inset: 0; opacity: .5; mix-blend-mode: multiply; background-image: var(--bp-grain); background-size: 160px 160px; }
+
+.bp__wall, .bp__stage, .bp__cracks, .bp__fx { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+.bp__stage, .bp__cracks { overflow: visible; }
+
+/* ---- the ground the stickman stands on ---- */
+.bp__floor { position: absolute; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(20, 42, 49, .28) 12%, rgba(20, 42, 49, .28) 88%, transparent); }
+
+/* ---- paper ---- */
+.bp-piece { position: absolute; transform-style: preserve-3d; will-change: transform; }
+.bp-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.bp-front svg { display: block; overflow: visible; }
+.bp-front::after { content: ''; position: absolute; inset: 0; background: #20170a; opacity: var(--sh, 0); pointer-events: none; }
+.bp-back { background: linear-gradient(135deg, #f1ecdd, #e2dac4 70%, #d9d0b7); }
+.bp-sh { position: absolute; inset: 0; filter: blur(9px); opacity: .34; transform: translate(7px, 15px); pointer-events: none; }
+.bp-sh i { position: absolute; inset: 0; background: #0d2a30; }
+.bp-sheet .bp-sh { opacity: .26; }
+
+/* ---- the drawing: strokes are drawn on with one dash-offset tween, text fades in ---- */
+.bp-art .dw { fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.bp-art .tx { opacity: 0; }
+.bp-art .late { opacity: 0; }
+.bp-art .t-serif { font-family: 'Instrument Serif', Georgia, serif; }
+.bp-art .t-mono { font-family: 'Geist Mono Variable', ui-monospace, monospace; }
+.bp-art .t-hand { font-family: 'Caveat', 'Bradley Hand', cursive; }
+.bp-art .fl { opacity: 0; }
+
+/* ---- chapter caption ---- */
+.bp__cap {
+  position: absolute; left: var(--pad, 24px); bottom: 26px; display: flex; align-items: center; gap: 14px; margin: 0;
+  font: 500 11px/1 var(--mono); letter-spacing: .2em; text-transform: uppercase; color: rgba(0, 18, 25, .55); pointer-events: none;
+}
+.bp__cap::before { content: ''; width: 34px; height: 1px; background: var(--bp-ink); flex: none; }
+.bp__cap b { color: var(--bp-orange); font-weight: 500; }
+.bp__cap span { display: inline-block; }
+
+.intro__skip {
+  position: absolute; z-index: 2; right: var(--pad, 24px); bottom: 18px; display: inline-flex; gap: 10px; align-items: center; min-height: 44px; padding: 0 18px;
+  border: 1px solid rgba(0, 18, 25, .28); border-radius: 999px; background: rgba(241, 238, 228, .6); color: var(--bp-ink);
+  font: 500 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; cursor: pointer; transition: background-color .3s, color .3s, border-color .3s;
+}
+.intro__skip:hover, .intro__skip:focus-visible { background: var(--bp-ink); color: #F1EEE4; border-color: var(--bp-ink); }
+
+@media (max-width: 720px) {
+  .bp__cap { bottom: 74px; font-size: 10px; letter-spacing: .16em; }
+  .bp__cap::before { width: 20px; }
+  .intro__skip { right: 50%; transform: translateX(50%); bottom: 18px; }
+}
+
+/* a calm, still version for people who prefer reduced motion */
+.intro.is-calm .bp__cap span { opacity: 1; }
+
+/* The hero holds its content hidden until it is released, with a 3.5s fail-safe. While the loader is playing
+   it is the loader that decides when that happens, so the fail-safe must not fire underneath it. */
+.is-loading.is-motion:not(.hero-go) :is(.hl__in, .hero__kicker, .hero__lede, .hero__actions, .hero__rail, .hero__gl, .bar, .bar-cta) { animation: none; }

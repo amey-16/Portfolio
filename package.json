@@ -20,6 +20,7 @@
     "@fontsource/barlow": "^5.3.0",
     "@fontsource/barlow-semi-condensed": "^5.3.0",
     "@fontsource/bodoni-moda": "^5.3.0",
+    "@fontsource/caveat": "^5.3.0",
     "@fontsource/instrument-serif": "^5.3.0",
     "@fontsource/manrope": "^5.3.0",
     "@tailwindcss/vite": "^4.3.3",

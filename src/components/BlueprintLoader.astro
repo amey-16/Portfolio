@@ -1,0 +1,19 @@
+---
+// "The Broken Blueprint": the page loader. This is markup only; scripts/blueprint/loader.js builds the
+// scene inside it, plays it, and hands over to the hero (see the contract at the top of that file).
+// The .intro element and the .skip control keep the names the rest of the site already relies on.
+---
+<div class="intro" role="presentation">
+  <p class="sr-only">Amey Shelar. Loading the portfolio.</p>
+  <div class="bp__bg" aria-hidden="true"></div>
+  <div class="bp__wall" aria-hidden="true"></div>
+  <svg class="bp__cracks" aria-hidden="true"></svg>
+  <svg class="bp__stage" aria-hidden="true"></svg>
+  <canvas class="bp__fx" aria-hidden="true"></canvas>
+  <p class="bp__cap" aria-hidden="true"></p>
+  <button class="intro__skip" type="button">Skip intro <span aria-hidden="true">→</span></button>
+</div>
+<script>
+  import { startBlueprintLoader } from '../scripts/blueprint/loader.js'
+  startBlueprintLoader()
+</script>

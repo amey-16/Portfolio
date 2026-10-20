@@ -11,6 +11,10 @@ import '@fontsource/bodoni-moda/latin-400-italic.css'
 import '../styles/site.css'
 import '../styles/hero.css'
 import '../styles/director.css'
+import '../styles/blueprint.css'
+import '@fontsource/caveat/500.css'
+import '@fontsource/caveat/600.css'
+import BlueprintLoader from '../components/BlueprintLoader.astro'
 import { getImage } from 'astro:assets'
 import portrait from '../assets/amey-portrait-bw.png'
 import { profile } from '../data/site'
@@ -51,10 +55,11 @@ const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8
       var root = document.documentElement
       root.classList.add(quiet ? 'is-quiet' : 'is-motion')
       if (quiet) return
-      // Preloader: every load and reload of the home page (not a page-to-page transition), motion allowed.
+      // Preloader: every load and reload of the home page (not a page-to-page transition). People who prefer
+      // reduced motion get a calm, still version of it instead of the film.
       var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
       try {
-        if (!reduce && location.pathname === '/' && !sessionStorage.getItem('amey-wipe')) { root.classList.add('is-loading'); if ('scrollRestoration' in history) history.scrollRestoration = 'manual' }
+        if (location.pathname === '/' && !sessionStorage.getItem('amey-wipe')) { root.classList.add('is-loading'); if ('scrollRestoration' in history) history.scrollRestoration = 'manual' }
         if (!reduce && sessionStorage.getItem('amey-wipe')) {
           root.classList.add('wipe-on')
           var wb = sessionStorage.getItem('amey-wipe-bg'), wf = sessionStorage.getItem('amey-wipe-fg')
@@ -67,10 +72,7 @@ const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8
   </script>
 </head>
 <body class:list={{ interior }}>
-  <div class="intro" role="presentation">
-    <p class="sr-only">Amey Shelar. Loading the portfolio.</p>
-    <button class="intro__skip" type="button">Skip intro <span aria-hidden="true">→</span></button>
-  </div>
+  <BlueprintLoader />
   <div class="wipe" aria-hidden="true"><p class="wipe__label"><span></span></p><small>Amey Shelar · ©2026</small></div>
   <div class="chap" aria-hidden="true"><span class="chap__n">01</span><span class="chap__roll"><b>Noise</b></span><span class="chap__thread"><i></i></span><span class="chap__pct">000%</span></div>
   <script is:inline>
@@ -122,6 +124,5 @@ const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8
 
   <div class="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__label"></span></div>
   <script>import '../scripts/site-boot.js'</script>
-  <script>import '../scripts/intro.js'</script>
 </body>
 </html>

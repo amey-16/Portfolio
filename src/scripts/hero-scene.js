@@ -464,8 +464,34 @@ export function createHeroScene(canvas, { animate = true, lite = false } = {}) {
   ro.observe(canvas)
   resize()
 
+  // Where the particle stream first becomes visible on screen: the mouth of the funnel, in CSS pixels
+  // relative to the viewport, with the radius of the stream there. The page loader reads this so the data
+  // it is carrying can flow into exactly this point. Position only: nothing here changes the scene.
+  const entryV = new THREE.Vector3()
+  function entryScreen() {
+    layout(simTime)
+    camera.matrixWorldInverse.copy(camera.matrixWorld).invert()
+    const r = canvas.getBoundingClientRect()
+    const toPx = (v) => ({ x: r.left + ((v.x + 1) / 2) * r.width, y: r.top + ((1 - v.y) / 2) * r.height })
+    // the shader fades particles in between ndc.x of -0.12 and 0.3; take the first point that is clearly visible
+    // (on a portrait camera that is further along the stream than on a landscape one)
+    for (let x = -5.2; x < 6; x += 0.05) {
+      entryV.set(x, world.position.y, 0).project(camera)
+      if (entryV.x < 0.12) continue
+      const c = toPx(entryV)
+      // half-height of the stream here: a narrow tube on the chaos side, the full band of lanes (+-1.2) once ordered
+      const left = 1 - smooth(-5.2, -0.15, x)
+      const tube = lerp(0.10, 2.5, Math.pow(left, 1.5)) * (1 - 0.6 * uniforms.uClarity.value)
+      const R = lerp(tube, 1.2, smooth(-0.2, 1.1, x))
+      entryV.set(x, world.position.y + R, 0).project(camera)
+      return { x: c.x, y: c.y, r: Math.abs(toPx(entryV).y - c.y) * 0.7 }
+    }
+    return null
+  }
+
   return {
     uniforms,
+    entryScreen,
     setProgress(p) { S.target = p; kick() },
     start() { if (running) return; running = true; lastTick = performance.now(); kick() },
     stop() { running = false; if (raf) cancelAnimationFrame(raf); raf = 0 },
